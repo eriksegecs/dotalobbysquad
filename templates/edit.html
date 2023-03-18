@@ -1,0 +1,90 @@
+<!-- Pagina de edição de times/tabela -->
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Lobbysquad </title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Lobby Squad</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(Página atual)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Adm <span class="sr-only">(Página atual)</span></a>
+
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <body style = "background-image: url('/static/img/back.png');" ></body>
+  <body rel="icon" type="image/x-icon" href="/static/img/fav.JPG"  ></body>
+    <div class="container pt-4">
+      {% block body %}
+
+      <div class="row" >
+        <div class="col-md-4 offset-md-4">
+          <div class="card card-body " >
+            <form action="/update/{{team.id}}" method="POST">
+              <!-- <div class="form-group">
+                <input type="text" name="team" value="{{team.team}}" class="form-control"  placeholder="Time">
+              </div> -->
+              <div class="form-group">
+                <input type="number" name="vitorias" value="{{team.vitorias}}" class="form-control"  placeholder="Vitorias">
+              </div>
+              <div class="form-group">
+                <input type="number" name="derrotas" value="{{team.derrotas}}" class="form-control"  placeholder="Derrotas">
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {% endblock %}
+    </div>
+
+<script>
+const btnDelete= document.querySelectorAll('.btn-delete');
+if(btnDelete) {
+  const btnArray = Array.from(btnDelete);
+  btnArray.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      if(!confirm('Tem certeza que deseja remover Time?')){
+        e.preventDefault();
+      }
+    });
+  })
+}
+
+$(document).ready(function() {
+    $('#example').DataTable({     
+      "aLengthMenu": [[3, 5, 10, 25, -1], [3, 5, 10, 25, "All"]],
+        "iDisplayLength": -1
+       } 
+    );
+} );
+
+</script>
+  </body>
+</html> 
