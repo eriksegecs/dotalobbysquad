@@ -176,7 +176,7 @@
     </section><!-- End Team Section -->
 
     <script>
-      const times = [
+      const TIMEX = [
         {
           time: "CUBA",
           jogadores: [{ pos1: "Monka", pos2: "Magus", pos3: "Bagal", pos4: "Mad", pos5: "Evilasio" },],
@@ -196,7 +196,7 @@
         },
         {    
           time: "Paredoom",
-          jogadores: [{ pos1: "SDF", pos1: "Bagal", pos1: "John Hope", pos1: "Render", pos1: "Willzao"},],
+          jogadores: [{ pos1: "SDF", pos3: "Bagal", pos2: "John Hope", pos4: "Render", pos5: "Willzao"},],
           Atividade: false,
         },
         {
@@ -222,19 +222,26 @@
       ]
     
       const box = document.querySelector(".box");
-  const timeNum = box.querySelector("#time-num");
-  const timeNome = box.querySelector("#time-nome");
-  const timeJogadores = box.querySelector("#time-jogadores");
+      const timeNum = box.querySelector("#time-num");
+      const timeNome = box.querySelector("#time-nome");
+      const timeJogadores = box.querySelector("#time-jogadores");
+      console.log('timeNome', timeNome);
+      
 
-  TIMES.forEach((time, index) => {
-    timeNum.textContent = `0${index + 1}`;
-    timeNome.textContent = time.time;
-    timeJogadores.textContent = time.jogadores
-      .map((jogador) => Object.values(jogador).join(" - "))
-      .join(" / ");
-  });
-  timeNome.textConten = 'Cuba';
-
+      TIMEX.forEach((time, index) => {
+        timeNum.textContent = index;
+        timeNome.textContent = time.time; //Nome do time
+        console.log('timeNome Nome', timeNome.textContent);
+        console.log('timeNome Numero', timeNum.textContent);
+        timeJogadores.textContent = time.jogadores //Nome dos jogadores
+          .map((jogador) => Object.values(jogador).join(" - "))
+          .join(" / ");
+          console.log('timeJogadores jogador aaaa', timeJogadores.textContent);
+        });
+        console.log('timeJogadores jogador vvvvv', timeJogadores.textContent);
+      
+      
+      
     </script>
 
     <!-- ======= Cast Section ======= -->
