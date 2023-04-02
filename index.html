@@ -50,9 +50,6 @@
           <li><a class="nav-link scrollto" href="#tabela">Tabela</a></li>
           <li><a class="nav-link scrollto" href="#equipe">Equipe</a></li>
           <Li><a class="nav-link scrollto" href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://evgouxjl7ceh43x3yclwzpipfi0ccytl.lambda-url.us-east-1.on.aws/&openid.realm=https://evgouxjl7ceh43x3yclwzpipfi0ccytl.lambda-url.us-east-1.on.aws/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select">Login</a></li>
-
-    </div
-
           <li><a class="nav-link scrollto" href="#testimonials">Bordões</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -122,24 +119,24 @@
           <h2>Major players!</h2>
           <p>Times</p>
         </div>
+        
+        
+        <div class="row" >
 
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="box" data-aos="zoom-in" data-aos-delay="100">
-              <span>01</span>
-              <h4>Konoha e-Sports</h4>
-              <p>Rurikido - The Jill - Tutinha - Sheyas - Ngogyn</p>
-            </div>
+
+          <div class="col-lg-4" id="times-div">
+            
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="zoom-in" data-aos-delay="200">
-              <span>02</span>
-              <h4>Paredoom</h4>
-              <p>SDF - Bagal - John Hope - Render - Willzao</p>
+            <div class="box" data-aos="zoom-in" data-aos-delay="300">
+              <span id="time-num"></span>
+              <h4 id="time-nome"></h4>
+              <p id="time-jogadores"></p>
             </div>
           </div>
 
+          <div><!-- somete para reservar os dados-->
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="box" data-aos="zoom-in" data-aos-delay="300">
               <span>03</span>
@@ -171,11 +168,74 @@
               <p>Soriehlam - Magus - Vinimace - Mad - Mystic </p>
             </div>
           </div>
+          </div>
 
         </div>
 
       </div>
     </section><!-- End Team Section -->
+
+    <script>
+      const times = [
+        {
+          time: "CUBA",
+          jogadores: [{ pos1: "Monka", pos2: "Magus", pos3: "Bagal", pos4: "Mad", pos5: "Evilasio" },],
+          Atividade: true,
+          
+        },
+        {
+          time: "Dees Big Nuts",
+          jogadores: [{ pos1: "Espanca", pos2: "GRÉRI", pos3: "B6", pos4: "Cara", pos5: "Sem Rabo" },],
+          Atividade: true,
+          
+        },
+        {
+          time: "Konoha e-Sports",
+          jogadores: [ { pos1: "Rurikido", pos2: "The Jill", pos3: "Tutinha", pos4: "Sheyas", pos5: "Ngogyn" },],
+          Atividade: false,
+        },
+        {    
+          time: "Paredoom",
+          jogadores: [{ pos1: "SDF", pos1: "Bagal", pos1: "John Hope", pos1: "Render", pos1: "Willzao"},],
+          Atividade: false,
+        },
+        {
+          time: "Yamete Kudasai",
+          players: [{ pos1: "Monka", pos2: "Chadeboldo", pos3: "Pablito", pos4: "Holanda", pos5: "Marcelinho"},],
+          Atividade: false,
+        },
+        {
+          time: "Berserkers",
+          players: [{ pos1: "Espanca", pos5: "Firles", pos3: "Pitoco", pos2: "Qjo", pos4: "Fisher"},],
+          Atividade: false,
+        },
+        {
+          time: "Parabellum",
+          players: [{ pos2: "Jedi", pos1: "B6", pos3: "Oneh", pos4: "Okadal", pos5: "Master C."},],
+          Atividade: false,
+        },
+        {
+          time: "Churrax",
+          players: [{ pos1: "Soriehlam", pos2: "Magus", pos3: "Vinimace", pos4: "Mad", pos5: "Mystic"},],
+          Atividade: false,
+        }
+      ]
+    
+      const box = document.querySelector(".box");
+  const timeNum = box.querySelector("#time-num");
+  const timeNome = box.querySelector("#time-nome");
+  const timeJogadores = box.querySelector("#time-jogadores");
+
+  TIMES.forEach((time, index) => {
+    timeNum.textContent = `0${index + 1}`;
+    timeNome.textContent = time.time;
+    timeJogadores.textContent = time.jogadores
+      .map((jogador) => Object.values(jogador).join(" - "))
+      .join(" / ");
+  });
+  timeNome.textConten = 'Cuba';
+
+    </script>
 
     <!-- ======= Cast Section ======= -->
     <section id="tabela" class="menu section-bg">
