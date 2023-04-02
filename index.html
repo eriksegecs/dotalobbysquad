@@ -568,7 +568,7 @@
     if (document.cookie.indexOf('access_token=') === -1) {
       // Usuário não está logado
       console.log('Usuário não está logado');
-      Alert('Usuário não está logado');
+      alert('Usuário não está logado');
     } else {
       // Extrair o token de acesso do cookie
       const token = document.cookie
@@ -582,11 +582,11 @@
       if (tokenIsValid(token)) {
         // Usuário está logado
         console.log('Usuário está logado');
-        Alert('logado');
+        alert('logado');
       } else {
         // Token de acesso inválido
         console.log('Token de acesso inválido');
-        Alert('Token de acesso inválido');
+        alert('Token de acesso inválido');
       }
     }
 

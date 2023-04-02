@@ -4,13 +4,13 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-$(document).ready(function() {
-  var req = new XMLHttpRequest();
-  req.open('GET', document.location, false);
-  req.send(null);
-  var headers = req.getAllResponseHeaders().toLowerCase();
-  alert(headers);
-} );
+// $(document).ready(function() {
+//   var req = new XMLHttpRequest();
+//   req.open('GET', document.location, false);
+//   req.send(null);
+//   var headers = req.getAllResponseHeaders().toLowerCase();
+//   alert(headers);
+// } );
 
 (function() {
   "use strict";
