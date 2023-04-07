@@ -568,7 +568,6 @@
     if (document.cookie.indexOf('access_token=') === -1) {
       // Usuário não está logado
       console.log('Usuário não está logado');
-      alert('Usuário não está logado');
     } else {
       // Extrair o token de acesso do cookie
       const token = document.cookie
@@ -582,11 +581,9 @@
       if (tokenIsValid(token)) {
         // Usuário está logado
         console.log('Usuário está logado');
-        alert('logado');
       } else {
         // Token de acesso inválido
         console.log('Token de acesso inválido');
-        alert('Token de acesso inválido');
       }
     }
 
@@ -599,11 +596,10 @@
       cognito.getUser({ AccessToken: token }, (err, data) => {
         if (err) {
           console.log(err);
-          Alert(err);
           return false;
         } else {
+          console.log("userdata");
           console.log(data);
-          Alert(data);
           return true;
         }
       });
