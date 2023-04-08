@@ -593,7 +593,7 @@
       // ou usar uma biblioteca de autenticação, como o AWS Amplify, para fazer isso automaticamente
       // Por exemplo:
       const cognito = new AWS.CognitoIdentityServiceProvider({region: "us-east-1"});
-      const userData = cognito.getUser({ AccessToken: token }, (err, data) => {
+      userData = cognito.getUser({ AccessToken: token }, (err, data) => {
         if (err) {
           console.log(err);
           return false;
