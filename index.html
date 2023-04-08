@@ -598,7 +598,7 @@
       let userData = await cognito.getUser({ AccessToken: token }).promise()
         if (userData){
           console.log("userdata");
-          console.log(data);
+          console.log(userData);
           return true;
         }
       
