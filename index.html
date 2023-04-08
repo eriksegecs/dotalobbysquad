@@ -49,7 +49,7 @@
           <li><a class="nav-link scrollto" href="#why-us">Times</a></li>
           <li><a class="nav-link scrollto" href="#tabela">Tabela</a></li>
           <li><a class="nav-link scrollto" href="#equipe">Equipe</a></li>
-          <Li><a class="nav-link scrollto" href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://evgouxjl7ceh43x3yclwzpipfi0ccytl.lambda-url.us-east-1.on.aws/&openid.realm=https://evgouxjl7ceh43x3yclwzpipfi0ccytl.lambda-url.us-east-1.on.aws/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select">Login</a></li>
+          <Li><a class="nav-link scrollto" href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://d3h8g0bzf4v6cv.cloudfront.net/api/v1/auth/&openid.realm=https://d3h8g0bzf4v6cv.cloudfront.net/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select">Login</a></li>
 
     </div
 
@@ -57,7 +57,7 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      <a href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://evgouxjl7ceh43x3yclwzpipfi0ccytl.lambda-url.us-east-1.on.aws/&openid.realm=https://evgouxjl7ceh43x3yclwzpipfi0ccytl.lambda-url.us-east-1.on.aws/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select" class="book-a-table-btn scrollto d-none d-lg-flex">Login</a>
+      <a href="https://d3h8g0bzf4v6cv.cloudfront.net/api/v1/info/" class="book-a-table-btn scrollto d-none d-lg-flex">info</a>
 
     </div>
   </header><!-- End Header -->
@@ -568,7 +568,6 @@
     if (document.cookie.indexOf('access_token=') === -1) {
       // Usuário não está logado
       console.log('Usuário não está logado');
-      alert('Usuário não está logado');
     } else {
       // Extrair o token de acesso do cookie
       const token = document.cookie
@@ -582,11 +581,9 @@
       if (tokenIsValid(token)) {
         // Usuário está logado
         console.log('Usuário está logado');
-        alert('logado');
       } else {
         // Token de acesso inválido
         console.log('Token de acesso inválido');
-        alert('Token de acesso inválido');
       }
     }
 
@@ -596,17 +593,18 @@
       // ou usar uma biblioteca de autenticação, como o AWS Amplify, para fazer isso automaticamente
       // Por exemplo:
       const cognito = new AWS.CognitoIdentityServiceProvider({region: "us-east-1"});
-      cognito.getUser({ AccessToken: token }, (err, data) => {
+      userData = await cognito.getUser({ AccessToken: token }, (err, data) => {
         if (err) {
           console.log(err);
-          Alert(err);
           return false;
         } else {
+          console.log("userdata");
           console.log(data);
-          Alert(data);
           return true;
         }
       });
+      steamID = userData.data.UserAttributes.find(obj => obj.Name === "custom:SteamID").Value;
+      document.cookie = "steamID="+steamID;
       // Neste exemplo, estamos usando o SDK do AWS Cognito para verificar se o token é válido
       // Se o token for válido, a função retornará true, caso contrário, retornará false
       return true;
