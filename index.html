@@ -603,7 +603,7 @@
           return true;
         }
       });
-      const steamID = userData.data.UserAttributes.find(obj => obj.Name === "custom:SteamID").Value;
+      steamID = userData.data.UserAttributes.find(obj => obj.Name === "custom:SteamID").Value;
       document.cookie = "steamID="+steamID;
       // Neste exemplo, estamos usando o SDK do AWS Cognito para verificar se o token é válido
       // Se o token for válido, a função retornará true, caso contrário, retornará false
