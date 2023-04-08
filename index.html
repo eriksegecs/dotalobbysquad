@@ -593,7 +593,7 @@
       // ou usar uma biblioteca de autenticação, como o AWS Amplify, para fazer isso automaticamente
       // Por exemplo:
       const cognito = new AWS.CognitoIdentityServiceProvider({region: "us-east-1"});
-      cognito.getUser({ AccessToken: token }, (err, data) => {
+      const userData = cognito.getUser({ AccessToken: token }, (err, data) => {
         if (err) {
           console.log(err);
           return false;
@@ -603,6 +603,8 @@
           return true;
         }
       });
+      const steamID = userData.data.UserAttributes.find(obj => obj.Name === "custom:SteamID").Value;
+      document.cookie = "steamID="+steamID;
       // Neste exemplo, estamos usando o SDK do AWS Cognito para verificar se o token é válido
       // Se o token for válido, a função retornará true, caso contrário, retornará false
       return true;
