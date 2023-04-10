@@ -55,9 +55,9 @@
 
       </nav><!-- .navbar -->
       <div id="playerinfo">
-        <img src="https://avatars.akamai.steamstatic.com/d84d56b37bb698158830696b3bef366e16777271.jpg" />
-        <a class=" d-none d-lg-flex">Fearless</a>
-        <a>playerid</a>
+        <img id ="avatarLink" src="https://avatars.akamai.steamstatic.com/d84d56b37bb698158830696b3bef366e16777271.jpg" />
+        <a id ="nickname" class=" d-none d-lg-flex">Fearless</a>
+        <a id ="steamID" >playerid</a>
       </div>
       <a href="https://d3h8g0bzf4v6cv.cloudfront.net/api/v1/info/" class="book-a-table-btn scrollto d-none d-lg-flex">info</a>
 
@@ -616,15 +616,16 @@
           const playerData = await response.json();
 
           // seleciona o elemento <img> e altera o valor do atributo 'src'
+          const playerAvatar = document.getElementById("avatarLink");
           const playerAvatar = document.getElementById("playerinfo").getElementsByTagName("img")[0];
           playerAvatar.setAttribute("src", playerData.avatarLink);
 
           // seleciona o primeiro elemento <a> e altera seu conteúdo
-          const playerName = document.getElementById("playerinfo").getElementsByTagName("a")[0];
+          const playerName = document.getElementById("nickname");
           playerName.textContent = playerData.nickname;
 
           // seleciona o segundo elemento <a> e altera seu conteúdo e o atributo 'href'
-          const playerID = document.getElementById("playerinfo").getElementsByTagName("a")[1];
+          const playerID = document.getElementById("steamID");
           playerID.textContent = playerData.steamID;
           playerID.setAttribute("href", "https://steamcommunity.com/profiles/" + playerData.steamID);
         } catch (error) {
