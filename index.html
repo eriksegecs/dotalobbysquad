@@ -566,49 +566,6 @@
   <!-- Template Main JS File -->
   <script src="static/assets/js/main.js"></script>
   <script>
-    // Verificar se o cookie access_token existe
-    if (document.cookie.indexOf('access_token=') === -1) {
-      // Usuário não está logado
-      console.log('Usuário não está logado');
-    } else {
-      // Extrair o token de acesso do cookie
-      const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('access_token='))
-        .split('=')[1];
-        console.log(token);     
-      // Verificar se o token de acesso é válido
-      // Aqui você pode fazer uma requisição para verificar se o token é válido
-      // ou usar uma biblioteca de autenticação, como o AWS Amplify, para fazer isso automaticamente
-      if (tokenIsValid(token)) {
-        // Usuário está logado
-        console.log('Usuário está logado');
-      } else {
-        // Token de acesso inválido
-        console.log('Token de acesso inválido');
-      }
-    }
-
-    // Função para verificar se o token de acesso é válido
-    async function tokenIsValid(token) {
-      // Aqui você pode fazer uma requisição para verificar se o token é válido
-      // ou usar uma biblioteca de autenticação, como o AWS Amplify, para fazer isso automaticamente
-      // Por exemplo:
-      const cognito = new AWS.CognitoIdentityServiceProvider({region: "us-east-1"});
-      let userData = await cognito.getUser({ AccessToken: token }).promise()
-        if (userData){
-          console.log("userdata");
-          console.log(userData);
-          return true;
-        }
-      
-      steamID = userData.data.UserAttributes.find(obj => obj.Name === "custom:SteamID").Value;
-      document.cookie = "steamID="+steamID;
-      // Neste exemplo, estamos usando o SDK do AWS Cognito para verificar se o token é válido
-      // Se o token for válido, a função retornará true, caso contrário, retornará false
-      return true;
-    }
-
       async function getPlayerInfo() {
         try {
           // faz uma solicitação HTTP para a API para obter os dados do jogador
