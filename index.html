@@ -609,26 +609,32 @@
       return true;
     }
 
-      // faz uma solicitação HTTP para a API para obter os dados do jogador
-      fetch('https://d3h8g0bzf4v6cv.cloudfront.net/api/v1/info/',{credentials: "include"})
-        .then(response => {
+      async function getPlayerInfo() {
+        try {
+          // faz uma solicitação HTTP para a API para obter os dados do jogador
+          const response = await fetch('https://d3h8g0bzf4v6cv.cloudfront.net/api/v1/info/');
+          const playerData = await response.json();
+
           // seleciona o elemento <img> e altera o valor do atributo 'src'
           const playerAvatar = document.getElementById("playerinfo").getElementsByTagName("img")[0];
-          playerAvatar.setAttribute("src", response.avatarLink);
+          playerAvatar.setAttribute("src", playerData.avatarLink);
 
           // seleciona o primeiro elemento <a> e altera seu conteúdo
           const playerName = document.getElementById("playerinfo").getElementsByTagName("a")[0];
-          playerName.textContent = response.nickname;
+          playerName.textContent = playerData.nickname;
 
           // seleciona o segundo elemento <a> e altera seu conteúdo e o atributo 'href'
           const playerID = document.getElementById("playerinfo").getElementsByTagName("a")[1];
-          playerID.textContent = response.steamID;
-          playerID.setAttribute("href", "https://steamcommunity.com/profiles/" + response.steamID);
-        })
-        .catch(error => {
+          playerID.textContent = playerData.steamID;
+          playerID.setAttribute("href", "https://steamcommunity.com/profiles/" + playerData.steamID);
+        } catch (error) {
           // lida com erros de solicitação HTTP
           console.error('Erro ao buscar dados do jogador:', error);
-        });
+        }
+      }
+
+      // chama a função assíncrona para buscar e atualizar as informações do jogador
+      getPlayerInfo();
 
       </script>
 
