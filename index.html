@@ -611,19 +611,19 @@
 
       // faz uma solicitação HTTP para a API para obter os dados do jogador
       fetch('https://d3h8g0bzf4v6cv.cloudfront.net/api/v1/info/',{credentials: "include"})
-        .then(playerData => {
+        .then(response => {
           // seleciona o elemento <img> e altera o valor do atributo 'src'
           const playerAvatar = document.getElementById("playerinfo").getElementsByTagName("img")[0];
-          playerAvatar.setAttribute("src", playerData.avatarLink);
+          playerAvatar.setAttribute("src", response.avatarLink);
 
           // seleciona o primeiro elemento <a> e altera seu conteúdo
           const playerName = document.getElementById("playerinfo").getElementsByTagName("a")[0];
-          playerName.textContent = playerData.nickname;
+          playerName.textContent = response.nickname;
 
           // seleciona o segundo elemento <a> e altera seu conteúdo e o atributo 'href'
           const playerID = document.getElementById("playerinfo").getElementsByTagName("a")[1];
-          playerID.textContent = playerData.steamID;
-          playerID.setAttribute("href", "https://steamcommunity.com/profiles/" + playerData.steamID);
+          playerID.textContent = response.steamID;
+          playerID.setAttribute("href", "https://steamcommunity.com/profiles/" + response.steamID);
         })
         .catch(error => {
           // lida com erros de solicitação HTTP
