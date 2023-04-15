@@ -50,7 +50,7 @@
           <li><a class="nav-link scrollto" href="#tabela">Tabela</a></li>
           <li><a class="nav-link scrollto" href="#equipe">Equipe</a></li>
           <li><a class="nav-link scrollto" href="#testimonials">Bordões</a></li>
-          <Li><a class="nav-link scrollto" href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://d3h8g0bzf4v6cv.cloudfront.net/api/v1/auth/&openid.realm=https://d3h8g0bzf4v6cv.cloudfront.net/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select">Login</a></li>
+          <Li><a class="nav-link scrollto" href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://lobbysquad.com.br/api/v1/auth/&openid.realm=https://lobbysquad.com.br/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select">Login</a></li>
   </ul>
 
       </nav><!-- .navbar -->
@@ -59,7 +59,7 @@
         <a id ="nickname" class=" d-none d-lg-flex">Fearless</a>
         <a id ="steamID" >playerid</a>
       </div>
-      <a href="https://d3h8g0bzf4v6cv.cloudfront.net/api/v1/info/" class="book-a-table-btn scrollto d-none d-lg-flex">info</a>
+      <a href="https://lobbysquad.com.br/api/v1/info/" class="book-a-table-btn scrollto d-none d-lg-flex">info</a>
 
     </div>
   </header><!-- End Header -->
@@ -569,7 +569,7 @@
       async function getPlayerInfo() {
         try {
           // faz uma solicitação HTTP para a API para obter os dados do jogador
-          const response = await fetch('https://d3h8g0bzf4v6cv.cloudfront.net/api/v1/info/');
+          const response = await fetch('https://lobbysquad.com.br/api/v1/info/');
           const playerData = await response.json();
 
           // seleciona o elemento <img> e altera o valor do atributo 'src'
