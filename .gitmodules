@@ -1,0 +1,3 @@
+[submodule "lambdas"]
+	path = lambdas
+	url = git@github.com:eriksegecs/dotalobbysquad-auth.git
