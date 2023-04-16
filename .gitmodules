@@ -1,3 +1,4 @@
 [submodule "lambdas"]
 	path = lambdas
-	url = git@github.com:eriksegecs/dotalobbysquad-auth.git@main
+	url = git@github.com:eriksegecs/dotalobbysquad-auth.git
+     	branch = master
