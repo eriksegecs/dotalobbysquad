@@ -24,9 +24,7 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
-    environment:
-      name: github-pages-dev
-      url: ${{ steps.deployment.outputs.page_url }}
+    environment: github-pages-dev
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
