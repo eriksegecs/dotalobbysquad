@@ -184,23 +184,28 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Classificação</h2>
-          <p>MMR</p>
+          <p>Calculadora de MMR Médio</p>
 
         <script>
         </script>
 
-      <div class="col-md-8">
-        <div id="tester" style="width:600px;height:250px;"></div>
-        <h1>MMR History</h1>
         <label for="mmr-input">Digite o MMR atual:</label>
         <input type="number" id="mmr-input" />
         <button id="mmr-button">Calcular</button>
         <div id="chart"></div>
+        <input type="text" id="search-input" placeholder="Pesquisar partida">
+        <table id="match-table" class="display">
+            <thead>
+                <tr>
+                    <th>Match ID</th>
+                    <th>MMR</th>
+                </tr>
+            </thead>
+            <tbody id="match-table-body"></tbody>
+        </table>
     
       </div>
 
-      </div>
     </section><!-- End Menu Section -->
 
     <!-- ======= Specials Section ======= -->
@@ -547,6 +552,14 @@
   <script src="https://sdk.amazonaws.com/js/amazon-cognito-auth.min.js"></script>
   <script src="https://raw.githubusercontent.com/aws/aws-sdk-js/master/dist/aws-sdk.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.20.0.min.js" charset="utf-8"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+  <style>
+      #match-table_wrapper {
+          margin-top: 20px;
+      }
+  </style>
+
 
 
 
@@ -675,6 +688,25 @@
 
               Plotly.newPlot('chart', chartData, layout);
           })
+          .then(function(data) {
+                    var tableBody = document.getElementById('match-table-body');
+                    tableBody.innerHTML = '';
+
+                    data.forEach(function(match) {
+                        var matchRow = document.createElement('tr');
+                        var matchIdCell = document.createElement('td');
+                        var mmrCell = document.createElement('td');
+                        matchIdCell.textContent = match.match_id;
+                        mmrCell.textContent = match.MMR;
+
+                        matchRow.appendChild(matchIdCell);
+                        matchRow.appendChild(mmrCell);
+
+                        tableBody.appendChild(matchRow);
+                    });
+
+                    $('#match-table').DataTable();
+                })
           .catch(function(error) {
               console.log('Erro ao buscar o histórico de MMR:', error);
           });
