@@ -687,9 +687,7 @@
               };
 
               Plotly.newPlot('chart', chartData, layout);
-          })
-          .then(function(data) {
-                    var tableBody = document.getElementById('match-table-body');
+              var tableBody = document.getElementById('match-table-body');
                     tableBody.innerHTML = '';
 
                     data.forEach(function(match) {
@@ -706,7 +704,9 @@
                     });
 
                     $('#match-table').DataTable();
+                    document.getElementById('match-table').style.display = 'block';
                 })
+          })
           .catch(function(error) {
               console.log('Erro ao buscar o histórico de MMR:', error);
           });
