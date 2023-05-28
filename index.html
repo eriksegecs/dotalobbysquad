@@ -586,7 +586,7 @@
   document.getElementById('mmr-button').addEventListener('click', function() {
       var mmrAtual = document.getElementById('mmr-input').value;
 
-      fetch('https://lobbysquad.com.br/api/v1/mmr?mmr_atual=' + mmrAtual)
+      fetch('https://www.lobbysquad.com.br/api/v1/mmr?mmr_atual=' + mmrAtual)
           .then(function(response) {
               return response.json();
           })
