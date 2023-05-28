@@ -47,7 +47,7 @@
           <li><a class="nav-link scrollto active" href="dotalobbysquad/">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">Conteúdo</a></li>
           <li><a class="nav-link scrollto" href="#why-us">Times</a></li>
-          <li><a class="nav-link scrollto" href="#tabela">Tabela</a></li>
+          <li><a class="nav-link scrollto" href="#MMR">MMR</a></li>
           <li><a class="nav-link scrollto" href="#equipe">Equipe</a></li>
           <li><a class="nav-link scrollto" href="#testimonials">Bordões</a></li>
           <Li><a class="nav-link scrollto" href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://www.lobbysquad.com.br/api/v1/auth/&openid.realm=https://www.lobbysquad.com.br/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select">Login</a></li>
@@ -180,39 +180,24 @@
     </section><!-- End Team Section -->
 
     <!-- ======= Cast Section ======= -->
-    <section id="tabela" class="menu section-bg">
+    <section id="MMR" class="menu section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Classificação</h2>
-          <p>Tabela</p>
+          <p>MMR</p>
 
         <script>
         </script>
 
       <div class="col-md-8">
-        <table class="table-dark table-test" >
-          <thead class="thead-dark">
-            <tr>
-              <!-- <td>Id</td> -->
-              <td>Time</td>
-              <td>Vitorias</td>
-              <td>Derrotas</td>
-              <!-- <td>Action</td> -->
-            </tr>
-          </thead>
-          <tbody>
-            {% for row in list_users %} 
-            <tr>
-              <!-- <td>{{row[0]}}</td> -->
-              <td>{{row[1]}}</td>
-              <td>{{row[2]}}</td>
-              <td>{{row[3]}}</td>
-          
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+        <div id="tester" style="width:600px;height:250px;"></div>
+        <h1>MMR History</h1>
+        <label for="mmr-input">Digite o MMR atual:</label>
+        <input type="number" id="mmr-input" />
+        <button id="mmr-button">Calcular</button>
+        <div id="chart"></div>
+    
       </div>
 
       </div>
@@ -561,6 +546,8 @@
   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.668.0.min.js"></script>
   <script src="https://sdk.amazonaws.com/js/amazon-cognito-auth.min.js"></script>
   <script src="https://raw.githubusercontent.com/aws/aws-sdk-js/master/dist/aws-sdk.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.20.0.min.js" charset="utf-8"></script>
+
 
 
   <!-- Template Main JS File -->
@@ -594,6 +581,53 @@
       getPlayerInfo();
 
       </script>
+
+<script>
+  document.getElementById('mmr-button').addEventListener('click', function() {
+      var mmrAtual = document.getElementById('mmr-input').value;
+
+      fetch('https://lobbysquad.com.br/api/v1/mmr?mmr_atual=' + mmrAtual)
+          .then(function(response) {
+              return response.json();
+          })
+          .then(function(data) {
+              var dates = [];
+              var mmrs = [];
+
+              data.forEach(function(match) {
+                  var timestamp = match.start_time * 1000; // Convert to milliseconds
+                  var date = new Date(timestamp);
+                  dates.push(date.toLocaleDateString());
+
+                  mmrs.push(match.MMR);
+              });
+
+              var chartData = [{
+                  x: dates,
+                  y: mmrs,
+                  type: 'scatter',
+                  mode: 'lines+markers'
+              }];
+
+              var layout = {
+                  title: 'MMR History',
+                  xaxis: {
+                      title: 'Data'
+                  },
+                  yaxis: {
+                      title: 'MMR'
+                  }
+              };
+
+              Plotly.newPlot('chart', chartData, layout);
+          })
+          .catch(function(error) {
+              console.log('Erro ao buscar o histórico de MMR:', error);
+          });
+  });
+</script>
+
+
 
 </body>
 
