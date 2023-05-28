@@ -602,12 +602,36 @@
                   mmrs.push(match.MMR);
               });
 
-              var chartData = [{
-                  x: dates,
-                  y: mmrs,
-                  type: 'scatter',
-                  mode: 'lines+markers'
-              }];
+              var smoothedMMR = [];
+              for (var i = 0; i < mmrs.length; i++) {
+                  var window = mmrs.slice(Math.max(0, i - 4), i + 1);
+                  var mean = window.reduce((sum, mmr) => sum + mmr, 0) / window.length;
+                  smoothedMMR.push(mean);
+              }
+
+              var chartData = [
+                  {
+                      x: dates,
+                      y: mmrs,
+                      type: 'scatter',
+                      mode: 'lines',
+                      name: 'MMR'
+                  },
+                  {
+                      type: 'line',
+                      xref: 'paper',
+                      yref: 'y',
+                      x0: 0,
+                      x1: 1,
+                      y0: smoothedMMR.reduce((sum, mmr) => sum + mmr, 0) / smoothedMMR.length,
+                      y1: smoothedMMR.reduce((sum, mmr) => sum + mmr, 0) / smoothedMMR.length,
+                      line: {
+                          color: 'red',
+                          dash: 'dash',
+                          width: 3
+                      }
+                  }
+              ];
 
               var layout = {
                   title: 'MMR History',
@@ -616,7 +640,36 @@
                   },
                   yaxis: {
                       title: 'MMR'
-                  }
+                  },
+                  shapes: [
+                      {
+                          type: 'rect',
+                          xref: 'paper',
+                          yref: 'y',
+                          x0: 0,
+                          x1: 1,
+                          y0: smoothedMMR.reduce((sum, mmr) => sum + mmr, 0) / smoothedMMR.length - 100,
+                          y1: smoothedMMR.reduce((sum, mmr) => sum + mmr, 0) / smoothedMMR.length + 100,
+                          fillcolor: 'rgba(255, 0, 0, 0.2)',
+                          line: {
+                              color: 'rgba(0, 0, 0, 0)'
+                          }
+                      }
+                  ],
+                  annotations: [
+                      {
+                          x: dates[Math.floor(dates.length / 2)],
+                          y: smoothedMMR.reduce((sum, mmr) => sum + mmr, 0) / smoothedMMR.length + 50,
+                          text: 'MMR Médio: ' + (smoothedMMR.reduce((sum, mmr) => sum + mmr, 0) / smoothedMMR.length).toFixed(2),
+                          showarrow: false,
+                          font: {
+                              color: 'black',
+                              size: 12
+                          },
+                          xanchor: 'right',
+                          yanchor: 'bottom'
+                      }
+                  ]
               };
 
               Plotly.newPlot('chart', chartData, layout);
@@ -626,6 +679,7 @@
           });
   });
 </script>
+
 
 
 
