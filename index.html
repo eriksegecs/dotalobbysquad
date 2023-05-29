@@ -691,51 +691,40 @@
               };
 
               Plotly.newPlot('chart', chartData, layout);
-              var tableBody = document.getElementById('match-table-body');
-                    tableBody.innerHTML = '';
+           // Configuração do DataTables
+           var tableData = data.map(function(match) {
+          var hero = hero_enums.find(function(hero) {
+            return hero.id === match.hero_id;
+          });
+          return [
+            match.match_id,
+            hero ? hero.localized_name : 'Unknown',
+            match.radiant_win ? 'Radiant' : 'Dire',
+            match.duration,
+            match.kills,
+            match.deaths,
+            match.assists,
+            match.MMR
+          ];
+        });
 
-
-
-
-
-                    var matchJsonData = [];
-                    data.forEach(function(match) {
-                        var heroIcon = '<img src="' + heroEnum[match.hero_id].icon + '" alt="' + heroEnum[match.hero_id].localized_name + '" width="24" height="24"> ' + heroEnum[match.hero_id].localized_name;
-                        var result = match.win ? 'Vitória' : 'Derrota';
-                        var kda = match.kills + '/' + match.deaths + '/' + match.assists;
-
-                        matchJsonData.push([
-                            match.match_id,
-                            heroIcon,
-                            result,
-                            match.duration,
-                            kda
-                        ]);
-                    });
-
-                    //$('#match-table').DataTable();
-                    $('#matchTable').DataTable({
-                      data: matchJsonData,
-                      columns: [
-                          { title: 'Match ID' },
-                          { title: 'Hero' },
-                          { title: 'Result', render: formatResult },
-                          { title: 'Duration' },
-                          { title: 'KDA' }
-                          ]
-                      });
-
-                    function formatResult(data) {
-                        if (data === 'Vitória') {
-                            return '<span style="color: green;">' + data + '</span>';
-                        } else if (data === 'Derrota') {
-                            return '<span style="color: red;">' + data + '</span>';
-                        } else {
-                            return data;
-                        }
-                    }
-                  });
-                });
+        $(document).ready(function() {
+          $('#match-table').DataTable({
+            data: tableData,
+            columns: [
+              { title: 'Match ID' },
+              { title: 'Hero' },
+              { title: 'Winning Team' },
+              { title: 'Duration' },
+              { title: 'Kills' },
+              { title: 'Deaths' },
+              { title: 'Assists' },
+              { title: 'MMR' }
+            ]
+          });
+        });
+      });
+  });
 </script>
 
 
