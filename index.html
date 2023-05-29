@@ -613,28 +613,23 @@
               };
 
               Plotly.newPlot('chart', chartData, layout);
-              Plotly.newPlot('chart', chartData, layout);
 
-// Atualiza a lista com base na seleção no gráfico
-document.getElementById('chart').on('plotly_selected', function(eventData) {
-  var selectedMatches = [];
-  if (eventData.points) {
-    selectedMatches = eventData.points.map(function(point) {
-      return point.x;
-    });
-  }
-  
-  var list = document.getElementById('selected-list');
-  list.innerHTML = '';
-  selectedMatches.forEach(function(matchDate) {
-    var listItem = document.createElement('li');
-    listItem.textContent = matchDate;
-    list.appendChild(listItem);
+        // Evento de clique para exibir a lista dos itens selecionados
+        document.getElementById('chart').on('plotly_click', function(eventData) {
+          var selectedMatches = eventData.points.map(function(point) {
+            return point.x;
+          });
+
+          var list = document.getElementById('selected-list');
+          list.innerHTML = '';
+          selectedMatches.forEach(function(matchDate) {
+            var listItem = document.createElement('li');
+            listItem.textContent = matchDate;
+            list.appendChild(listItem);
+          });
+        });
+      });
   });
-});
-});
-});
-</script>
 </script>
 
 
