@@ -691,38 +691,28 @@
               };
 
               Plotly.newPlot('chart', chartData, layout);
-              // Configuração do DataTables
-              var tableData = data.map(function(match) {
-              var hero = hero_enums.find(function(hero) {
-                return hero.id === match.hero_id;
-              });
-          return [
-            match.match_id,
-            hero ? hero.localized_name : 'Unknown',
-            match.radiant_win ? 'Radiant' : 'Dire',
-            match.duration,
-            match.kills,
-            match.deaths,
-            match.assists,
-            match.MMR
-          ];
-        });
+              Plotly.newPlot('chart', chartData, layout);
 
-          $('#matchTable').DataTable({
-            data: tableData,
-            columns: [
-              { title: 'Match ID' },
-              { title: 'Hero' },
-              { title: 'Winning Team' },
-              { title: 'Duration' },
-              { title: 'Kills' },
-              { title: 'Deaths' },
-              { title: 'Assists' },
-              { title: 'MMR' }
-            ]
-          });
-        });
-      });
+// Atualiza a lista com base na seleção no gráfico
+document.getElementById('chart').on('plotly_selected', function(eventData) {
+  var selectedMatches = [];
+  if (eventData.points) {
+    selectedMatches = eventData.points.map(function(point) {
+      return point.x;
+    });
+  }
+  
+  var list = document.getElementById('selected-list');
+  list.innerHTML = '';
+  selectedMatches.forEach(function(matchDate) {
+    var listItem = document.createElement('li');
+    listItem.textContent = matchDate;
+    list.appendChild(listItem);
+  });
+});
+});
+});
+</script>
 </script>
 
 
