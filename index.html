@@ -691,11 +691,11 @@
               };
 
               Plotly.newPlot('chart', chartData, layout);
-           // Configuração do DataTables
-           var tableData = data.map(function(match) {
-          var hero = hero_enums.find(function(hero) {
-            return hero.id === match.hero_id;
-          });
+              // Configuração do DataTables
+              var tableData = data.map(function(match) {
+              var hero = hero_enums.find(function(hero) {
+                return hero.id === match.hero_id;
+              });
           return [
             match.match_id,
             hero ? hero.localized_name : 'Unknown',
@@ -708,8 +708,7 @@
           ];
         });
 
-        $(document).ready(function() {
-          $('#match-table').DataTable({
+          $('#matchTable').DataTable({
             data: tableData,
             columns: [
               { title: 'Match ID' },
@@ -724,7 +723,6 @@
           });
         });
       });
-  });
 </script>
 
 
