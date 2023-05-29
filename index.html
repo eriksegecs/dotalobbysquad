@@ -601,7 +601,7 @@
                       {
                           x: dates[Math.floor(dates.length / 2)],
                           y: smoothedMMR.reduce((sum, mmr) => sum + mmr, 0) / smoothedMMR.length + 50,
-                          text: 'MMR Médio: ' + (smoothedMMR.reduce((sum, mmr) => sum + mmr, 0) / smoothedMMR.length).toFixed(2),
+                          text: 'MMR Médio: ' + (smoothedMMR.reduce((sum, mmr) => sum + mmr, 0) / smoothedMMR.length).toFixed(0),
                           showarrow: false,
                           font: {
                               color: 'black',
