@@ -194,7 +194,7 @@
         <button id="mmr-button">Calcular</button>
         <div id="chart"></div>
         <input type="text" id="search-input" placeholder="Pesquisar partida">
-        <table id="match-table" class="display">
+        <table id="matchTable" class="display">
             <thead>
                 <tr>
                   <th>Match ID</th>
@@ -695,7 +695,7 @@
                     tableBody.innerHTML = '';
 
 
-                    });
+
 
 
                     var matchJsonData = [];
@@ -712,7 +712,7 @@
                             kda
                         ]);
                     });
-
+                  });
                     //$('#match-table').DataTable();
                     $('#matchTable').DataTable({
                       data: matchJsonData,
