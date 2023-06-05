@@ -1,4 +1,5 @@
 # DotaLobbySquad
+[![Deploy to GitHub Pages](https://github.com/eriksegecs/dotalobbysquad/actions/workflows/static.yml/badge.svg)](https://github.com/eriksegecs/dotalobbysquad/actions/workflows/static.yml)
 
 O DotaLobbySquad é uma comunidade de dota, esse projeto tem como propósito prover um site para centralizarmos algumas informações.
 
