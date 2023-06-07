@@ -1,6 +1,13 @@
+// {
+//   "extends": [
+//     "next/core-web-vitals",
+//     "@rocketseat/eslint-config/react"
+//   ]
+// }
 {
-  "extends": [
-    "next/core-web-vitals",
-    "@rocketseat/eslint-config/react"
-  ]
+  "extends": "next",
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
+  }
 }
