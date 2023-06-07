@@ -2,7 +2,7 @@
 
 export function Title() {
     return (
-        <section id="hero" className="bg-auto bg-cover bg-center relative min-h-screen lg:bg-fixed items-center bg-[url(../assets/forest.gif)]">
+        <section id="hero" className="bg-auto bg-cover bg-center min-h-screen lg:bg-fixed items-center bg-[url(../assets/forest.gif)]">
 
             <div className="text-center py-52">
             <div className="row">

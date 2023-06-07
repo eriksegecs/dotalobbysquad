@@ -1,7 +1,7 @@
 
 export function Header() {
     return (
-        <nav className="relative w-full fixed flex items-center justify-between flex-wrap bg-zinc-900 p-6 lg:pl-40">
+        <nav className="sticky top-0 w-full fixed flex items-center justify-between flex-wrap bg-zinc-900 p-6 lg:pl-40">
 
             <div className="flex items-center flex-shrink-0 text-white mr-6">
                 <span className="font-alt uppercase text-2xl tracking-tight">DotaLobbySquad</span>
