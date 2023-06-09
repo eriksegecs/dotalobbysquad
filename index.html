@@ -697,73 +697,6 @@
       });
   });
   
-const region = 'us-east-1';
-AWS.config.region = region;
-
-
-// Configurar o SDK do Cognito
-const poolData = {
-  UserPoolId: 'us-east-1_oefZ2JZrh',
-  ClientId: '600g6sgvu2fr5uhfugqrgoh2sn'
-};
-
-// Configurar as credenciais de acesso
-AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-  IdentityPoolId: 'us-east-1:a4d06082-3df1-400c-a1ac-81fb4a7b8f93',
-});
-
-// Criar um objeto de serviço do Amazon Cognito
-const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
-
-// Obter os tokens do cookie
-const accessToken = getCookieValue('access_token');
-const refreshToken = getCookieValue('refresh_token');
-
-// Função para autenticar usando o access token
-function authenticateWithAccessToken(token) {
-  const params = {
-    AuthFlow: 'REFRESH_TOKEN_AUTH',
-    AuthParameters: {
-      REFRESH_TOKEN: token
-    },
-    ClientId: '600g6sgvu2fr5uhfugqrgoh2sn'
-  };
-
-  cognitoIdentityServiceProvider.initiateAuth(params, (err, data) => {
-    if (err) {
-      console.error('Erro ao atualizar o token de acesso:', err);
-      if (err.code === 'NotAuthorizedException') {
-        // Se o token estiver inválido, renovar e reautenticar usando o refresh token
-        reauthenticateWithRefreshToken();
-      }
-      return;
-    }
-
-    console.log('Token de acesso atualizado:', data.AuthenticationResult.AccessToken);
-  });
-}
-
-// Função para reautenticar usando o refresh token
-function reauthenticateWithRefreshToken() {
-  const params = {
-    AuthFlow: 'REFRESH_TOKEN_AUTH',
-    AuthParameters: {
-      REFRESH_TOKEN: refreshToken
-    },
-    ClientId: '600g6sgvu2fr5uhfugqrgoh2sn'
-  };
-
-  cognitoIdentityServiceProvider.initiateAuth(params, (err, data) => {
-    if (err) {
-      console.error('Erro ao renovar o token de acesso:', err);
-      return;
-    }
-
-    console.log('Token de acesso renovado:', data.AuthenticationResult.AccessToken);
-  });
-}
-
-
 // Função auxiliar para obter o valor de um cookie
 function getCookieValue(name) {
   const cookies = document.cookie.split(';');
@@ -775,10 +708,55 @@ function getCookieValue(name) {
   }
   return null;
 }
+// Obter os tokens do cookie
+const accessToken = getCookieValue('access_token');
+const refreshToken = getCookieValue('refresh_token');
 
-// Autenticar usando o access token
-authenticateWithAccessToken(accessToken);
-  
+const params = {
+    AuthFlow: 'REFRESH_TOKEN_AUTH',
+    ClientId: '600g6sgvu2fr5uhfugqrgoh2sn',
+    AuthParameters: {
+      REFRESH_TOKEN: refreshToken 
+    }
+};
+
+
+const AWS = require('aws-sdk');
+
+
+// Initialize the Amazon Cognito credentials provider
+AWS.config.region = 'us-east-1'; // Region
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: 'us-east-1:a4d06082-3df1-400c-a1ac-81fb4a7b8f93',
+});
+
+// Configurar as informações do User Pool
+const poolData = {
+  UserPoolId: 'us-east-1_oefZ2JZrh',
+  ClientId: '600g6sgvu2fr5uhfugqrgoh2sn'
+};
+
+// Criar uma instância do CognitoIdentityServiceProvider
+const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider(poolData);
+
+// Configurar as credenciais do AWS SDK com o AWS.CognitoIdentityCredentials
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: 'us-east-1:a4d06082-3df1-400c-a1ac-81fb4a7b8f93',
+});
+
+cognitoIdentityServiceProvider.initiateAuth(params, (err, result) => {
+    if (err) {
+      console.error('Erro ao atualizar o token de acesso:', err);
+      if (err.code === 'NotAuthorizedException') {
+        // Se o token estiver inválido, renovar e reautenticar usando o refresh token
+        reauthenticateWithRefreshToken();
+      }
+      return;
+    }
+
+    console.log('Token de acesso atualizado:', result.AuthenticationResult.AccessToken);
+  });
+
   
 </script>
 
