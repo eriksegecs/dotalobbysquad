@@ -542,6 +542,7 @@
   <script src="https://raw.githubusercontent.com/aws/aws-sdk-js/master/dist/aws-sdk.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.20.0.min.js" charset="utf-8"></script>
   <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@6.2.0/lib/index.min.js"></script>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
   <style>
       #match-table_wrapper {
@@ -695,6 +696,72 @@
         });
       });
   });
+  
+// Obter os tokens do cookie
+const accessToken = getCookieValue('accessToken');
+const refreshToken = getCookieValue('refreshToken');
+
+// Configurar o SDK do Cognito
+const poolData = {
+  UserPoolId: 'us-east-1_oefZ2JZrh',
+  ClientId: '600g6sgvu2fr5uhfugqrgoh2sn'
+};
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+// Função para autenticar usando o access token
+function authenticateWithAccessToken(accessToken) {
+  const cognitoUser = userPool.getCurrentUser();
+  if (!cognitoUser) {
+    console.log('Usuário não autenticado');
+    return;
+  }
+
+  cognitoUser.refreshSession(accessToken, (err, session) => {
+    if (err) {
+      console.error('Erro ao atualizar o token de acesso:', err);
+      if (err.code === 'InvalidTokenException') {
+        // Se o token estiver inválido, renovar e reautenticar usando o refresh token
+        reauthenticateWithRefreshToken(refreshToken);
+      }
+      return;
+    }
+
+    console.log('Token de acesso atualizado:', session.accessToken.jwtToken);
+  });
+}
+
+// Função para reautenticar usando o refresh token
+function reauthenticateWithRefreshToken(refreshToken) {
+  const userData = {
+    Username: 'YOUR_USERNAME',
+    Pool: userPool
+  };
+  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+  cognitoUser.refreshSession(refreshToken, (err, session) => {
+    if (err) {
+      console.error('Erro ao renovar o token de acesso:', err);
+      return;
+    }
+
+    console.log('Token de acesso renovado:', session.accessToken.jwtToken);
+  });
+}
+
+// Função auxiliar para obter o valor de um cookie
+function getCookieValue(name) {
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim();
+    if (cookie.startsWith(`${name}=`)) {
+      return cookie.substring(name.length + 1);
+    }
+  }
+  return null;
+}
+
+// Autenticar usando o access token
+authenticateWithAccessToken(accessToken);
 </script>
 
 
