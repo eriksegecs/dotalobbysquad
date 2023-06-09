@@ -62,7 +62,7 @@
         <a id ="nickname" class=" d-none d-lg-flex"></a>
       </div>
       <a id="loginButton" class="book-a-table-btn scrollto" href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://www.lobbysquad.com.br/api/v1/auth/&openid.realm=https://www.lobbysquad.com.br/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select">Login</a>
-      <a id="logoutButton" class="book-a-table-btn scrollto" href="https://www.lobbysquad.com/" onclick="logout()">Logout</a>
+      <a id="logoutButton" class="book-a-table-btn scrollto" href="https://www.lobbysquad.com.br/" onclick="logout()">Logout</a>
 
   
     </div>
@@ -690,7 +690,7 @@ async function getPlayerInfo() {
 
     // mostra o botao logout
     const logoutButton = document.getElementById("logoutButton");
-    loginButton.style.display = "block";
+    logoutButton.style.display = "block";
 
   } catch (error) {
     // lida com erros de solicitação HTTP
