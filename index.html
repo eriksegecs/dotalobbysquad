@@ -697,15 +697,8 @@
       });
   });
   
-// Obter os tokens do cookie
-const accessToken = getCookieValue('access_token');
-const refreshToken = getCookieValue('refresh_token');
-
 const region = 'us-east-1';
 AWS.config.region = region;
-
-// Importar o SDK do AWS
-const AWS = require('aws-sdk');
 
 
 // Configurar o SDK do Cognito
@@ -785,6 +778,8 @@ function getCookieValue(name) {
 
 // Autenticar usando o access token
 authenticateWithAccessToken(accessToken);
+  
+  
 </script>
 
 
