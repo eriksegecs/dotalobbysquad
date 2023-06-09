@@ -62,7 +62,8 @@
         <a id ="nickname" class=" d-none d-lg-flex"></a>
       </div>
       <a id="loginButton" class="book-a-table-btn scrollto" href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://www.lobbysquad.com.br/api/v1/auth/&openid.realm=https://www.lobbysquad.com.br/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select">Login</a>
-      <a id="logoutButton" class="book-a-table-btn scrollto" href="https://www.lobbysquad.com/">Logout</a>
+      <a id="logoutButton" class="book-a-table-btn scrollto" href="https://www.lobbysquad.com/" onclick="logout()">Logout</a>
+
   
     </div>
   </header><!-- End Header -->
@@ -768,6 +769,23 @@ if (!refreshToken) {
   // chama a função assíncrona para buscar e atualizar as informações do jogador
   getPlayerInfo();
   
+}
+
+function logout() {
+  // Delete access_token cookie
+  document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+  // Delete refresh_token cookie
+  document.cookie = "refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+  // Delete token_identity cookie
+  document.cookie = "token_identity=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+  // Delete steamid cookie
+  document.cookie = "steamid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+  // Redirect the user to the logout page or any other desired destination
+  window.location.href = "https://www.example.com/logout";
 }
 
 
