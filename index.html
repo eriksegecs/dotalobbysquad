@@ -554,35 +554,6 @@
 
   <!-- Template Main JS File -->
   <script src="static/assets/js/main.js"></script>
-  <script>
-      async function getPlayerInfo() {
-        try {
-          // faz uma solicitação HTTP para a API para obter os dados do jogador
-          const response = await fetch('https://www.lobbysquad.com.br/api/v1/info/');
-          const playerData = await response.json();
-
-          // seleciona o elemento <img> e altera o valor do atributo 'src'
-          const playerAvatar = document.getElementById("avatarLink");
-          playerAvatar.setAttribute("src", playerData.avatarLink);
-
-          // seleciona o primeiro elemento <a> e altera seu conteúdo
-          const playerName = document.getElementById("nickname");
-          playerName.textContent = playerData.nickname;
-
-          // seleciona o segundo elemento <a> e altera seu conteúdo e o atributo 'href'
-          const playerID = document.getElementById("steamID");
-          playerID.textContent = playerData.steamID;
-          playerID.setAttribute("href", "https://steamcommunity.com/profiles/" + playerData.steamID);
-        } catch (error) {
-          // lida com erros de solicitação HTTP
-          console.error('Erro ao buscar dados do jogador:', error);
-        }
-      }
-
-      // chama a função assíncrona para buscar e atualizar as informações do jogador
-      getPlayerInfo();
-
-      </script>
 
 <script>
   document.getElementById('mmr-button').addEventListener('click', function() {
@@ -696,63 +667,108 @@
       });
   });
   
-// Função auxiliar para obter o valor de um cookie
-function getCookieValue(name) {
-  const cookies = document.cookie.split(';');
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim();
-    if (cookie.startsWith(`${name}=`)) {
-      return cookie.substring(name.length + 1);
-    }
+async function getPlayerInfo() {
+  try {
+    // faz uma solicitação HTTP para a API para obter os dados do jogador
+    const response = await fetch('https://www.lobbysquad.com.br/api/v1/info/');
+    const playerData = await response.json();
+
+    // seleciona o elemento <img> e altera o valor do atributo 'src'
+    const playerAvatar = document.getElementById("avatarLink");
+    playerAvatar.setAttribute("src", playerData.avatarLink);
+
+    // seleciona o primeiro elemento <a> e altera seu conteúdo
+    const playerName = document.getElementById("nickname");
+    playerName.textContent = playerData.nickname;
+
+    // seleciona o segundo elemento <a> e altera seu conteúdo e o atributo 'href'
+    const playerID = document.getElementById("steamID");
+    playerID.textContent = playerData.steamID;
+    playerID.setAttribute("href", "https://steamcommunity.com/profiles/" + playerData.steamID);
+  } catch (error) {
+    // lida com erros de solicitação HTTP
+    console.error('Erro ao buscar dados do jogador:', error);
   }
-  return null;
 }
-// Obter os tokens do cookie
-const accessToken = getCookieValue('access_token');
-const refreshToken = getCookieValue('refresh_token');
-
-const params = {
-    AuthFlow: 'REFRESH_TOKEN_AUTH',
-    ClientId: '600g6sgvu2fr5uhfugqrgoh2sn',
-    AuthParameters: {
-      REFRESH_TOKEN: refreshToken 
-    }
-};
 
 
-
-// Initialize the Amazon Cognito credentials provider
-AWS.config.region = 'us-east-1'; // Region
-AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: 'us-east-1:a4d06082-3df1-400c-a1ac-81fb4a7b8f93',
-});
-
-// Configurar as informações do User Pool
-const poolData = {
-  UserPoolId: 'us-east-1_oefZ2JZrh',
-  ClientId: '600g6sgvu2fr5uhfugqrgoh2sn'
-};
-
-// Criar uma instância do CognitoIdentityServiceProvider
-const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider(poolData);
-
-// Configurar as credenciais do AWS SDK com o AWS.CognitoIdentityCredentials
-AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: 'us-east-1:a4d06082-3df1-400c-a1ac-81fb4a7b8f93',
-});
-
-cognitoIdentityServiceProvider.initiateAuth(params, (err, result) => {
-    if (err) {
-      console.error('Erro ao atualizar o token de acesso:', err);
-      if (err.code === 'NotAuthorizedException') {
-        // Se o token estiver inválido, renovar e reautenticar usando o refresh token
-        reauthenticateWithRefreshToken();
+  function refreshTokenAuth(refreshToken) {
+  var url = "https://dotalobbysquad4.auth.us-east-1.amazoncognito.com/oauth2/token";
+  
+  var params2 = {
+    grant_type: "refresh_token",
+    client_id: "600g6sgvu2fr5uhfugqrgoh2sn",
+    refresh_token: refreshToken
+  };
+  
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: new URLSearchParams(params2)
+  })
+    .then(function(response) {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Erro na solicitação: " + response.status);
       }
-      return;
-    }
+    })
+    .then(function(data) {
+      // Armazene os novos tokens onde preferir (por exemplo, em cookies)
+      var accessToken = data.access_token;
+      var id_token = data.id_token;
+      
+      // Extrair o tempo de expiração do access_token (em segundos)
+      var expiresIn = data.expires_in;
+      
+      // Calcular a data e hora de expiração do access_token
+      var expirationDate = new Date();
+      expirationDate.setSeconds(expirationDate.getSeconds() + expiresIn);
+      
+      // Converter a data de expiração para o formato UTC string
+      var expiresUTCString = expirationDate.toUTCString();
+      
+      // Defina o cookie do access_token com a data de expiração
+      document.cookie = "access_token=" + accessToken + "; expires=" + expiresUTCString + "; path=/";
+       
+      document.cookie = "token_identity=" + id_token + "; expires=" + expiresUTCString + "; path=/";
 
-    console.log('Token de acesso atualizado:', result.AuthenticationResult.AccessToken);
-  });
+      // Use o novo access_token para fazer chamadas à API protegida
+      // ...
+    })
+    .catch(function(error) {
+      console.error("Erro ao autenticar: ", error);
+    });
+}
+
+// Obtenha o valor do cookie "refresh_token"
+var refreshToken = document.cookie.replace(/(?:(?:^|.*;\s*)refresh_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+// verifica se o cookie "refresh_token" existe
+if (!refreshToken) {
+  console.error("necessário logar com a steam: cookie 'refresh_token' não encontrado.");
+
+} else {
+  // chama a função assíncrona para buscar e atualizar as informações do jogador
+  getPlayerInfo();
+  
+}
+
+//verifica se o cookie access_token existe
+var accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+
+if (!accessToken) {
+  console.error("necessário autenticar: cookie 'access_token' não encontrado.");
+  // Chame a função refreshTokenAuth para autenticar
+  refreshTokenAuth(refreshToken);
+}
+
+
+
+
 
   
 </script>
