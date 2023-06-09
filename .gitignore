@@ -1,2 +1,7 @@
 ideias.txt
 .github/workflows/static.yml
+.next/
+build/
+next-env.d.ts
+node_modules/
+out/

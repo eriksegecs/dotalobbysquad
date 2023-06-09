@@ -60,9 +60,10 @@
       <div id="playerinfo">
         <img id ="avatarLink"/>
         <a id ="nickname" class=" d-none d-lg-flex"></a>
-        <a id ="steamID" ></a>
       </div>
-      <a class="book-a-table-btn scrollto" href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://www.lobbysquad.com.br/api/v1/auth/&openid.realm=https://www.lobbysquad.com.br/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select">Login</a>
+      <a id="loginButton" class="book-a-table-btn scrollto" href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://www.lobbysquad.com.br/api/v1/auth/&openid.realm=https://www.lobbysquad.com.br/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select">Login</a>
+      <a id="logoutButton" class="book-a-table-btn scrollto" href="https://www.lobbysquad.com/">Logout</a>
+  
     </div>
   </header><!-- End Header -->
 
@@ -680,11 +681,16 @@ async function getPlayerInfo() {
     // seleciona o primeiro elemento <a> e altera seu conteúdo
     const playerName = document.getElementById("nickname");
     playerName.textContent = playerData.nickname;
+    playerName.setAttribute("href", "https://steamcommunity.com/profiles/" + playerData.steamID);
+    
+    // esconde o botao login
+    const loginButton = document.getElementById("loginButton");
+    loginButton.style.display = "none";
 
-    // seleciona o segundo elemento <a> e altera seu conteúdo e o atributo 'href'
-    const playerID = document.getElementById("steamID");
-    playerID.textContent = playerData.steamID;
-    playerID.setAttribute("href", "https://steamcommunity.com/profiles/" + playerData.steamID);
+    // mostra o botao logout
+    const logoutButton = document.getElementById("logoutButton");
+    loginButton.style.display = "block";
+
   } catch (error) {
     // lida com erros de solicitação HTTP
     console.error('Erro ao buscar dados do jogador:', error);
@@ -751,20 +757,19 @@ if (!refreshToken) {
   console.error("necessário logar com a steam: cookie 'refresh_token' não encontrado.");
 
 } else {
+  //verifica se o cookie access_token existe
+  var accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+  if (!accessToken) {
+    console.error("necessário autenticar: cookie 'access_token' não encontrado.");
+    // Chame a função refreshTokenAuth para autenticar e salvar o access_token nos cookies
+    refreshTokenAuth(refreshToken);
+  }
+
   // chama a função assíncrona para buscar e atualizar as informações do jogador
   getPlayerInfo();
   
 }
 
-//verifica se o cookie access_token existe
-var accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-
-
-if (!accessToken) {
-  console.error("necessário autenticar: cookie 'access_token' não encontrado.");
-  // Chame a função refreshTokenAuth para autenticar
-  refreshTokenAuth(refreshToken);
-}
 
 
 

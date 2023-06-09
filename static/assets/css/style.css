@@ -8,6 +8,7 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
 body {
   font-family: "Open Sans", sans-serif;
   background: #0c0b09;
@@ -202,8 +203,9 @@ position: relative;
 padding: 0;
 }
 
-
-
+#logoutButton {
+  display: none;
+}
 
 .book-a-table-btn {
   margin: 0 0 0 15px;
