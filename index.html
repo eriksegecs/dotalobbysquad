@@ -872,33 +872,63 @@
       });
   });
   
+// Função para salvar as informações do jogador no localStorage
+function savePlayerInfo(playerData) {
+  localStorage.setItem('playerInfo', JSON.stringify(playerData));
+  console.log('Informações do jogador salvas no localStorage.');
+}
+
+// Função para obter as informações do jogador do localStorage
+function getPlayerInfoFromStorage() {
+  const playerData = localStorage.getItem('playerInfo');
+  if (playerData) {
+    return JSON.parse(playerData);
+  } else {
+    console.error('Nenhuma informação do jogador encontrada no localStorage.');
+    return null;
+  }
+}
+
+// Função principal para obter as informações do jogador
 async function getPlayerInfo() {
   try {
-    // faz uma solicitação HTTP para a API para obter os dados do jogador
+    // Verifica se as informações do jogador já estão salvas no localStorage
+    const storedPlayerData = getPlayerInfoFromStorage();
+    if (storedPlayerData) {
+      // Utiliza as informações salvas no localStorage
+      updatePlayerInfo(storedPlayerData);
+      return;
+    }
+
+    // Faz uma solicitação HTTP para a API para obter os dados do jogador
     const response = await fetch('https://www.lobbysquad.com.br/api/v1/info/');
     const playerData = await response.json();
 
-    // seleciona o elemento <img> e altera o valor do atributo 'src'
-    const playerAvatar = document.getElementById("avatarLink");
-    playerAvatar.setAttribute("src", playerData.avatarLink);
+    // Salva as informações do jogador no localStorage
+    savePlayerInfo(playerData);
 
-    // seleciona o primeiro elemento <a> e altera seu conteúdo
-    const playerName = document.getElementById("nickname");
-    playerName.textContent = playerData.nickname;
-    playerName.setAttribute("href", "https://steamcommunity.com/profiles/" + playerData.steamID);
-    
-    // esconde o botao login
-    const loginButton = document.getElementById("loginButton");
-    loginButton.style.display = "none";
-
-    // mostra o botao logout
-    const logoutButton = document.getElementById("logoutButton");
-    logoutButton.style.display = "block";
-
+    // Atualiza as informações do jogador na página
+    updatePlayerInfo(playerData);
   } catch (error) {
-    // lida com erros de solicitação HTTP
+    // Lida com erros de solicitação HTTP
     console.error('Erro ao buscar dados do jogador:', error);
   }
+}
+
+// Função para atualizar as informações do jogador na página
+function updatePlayerInfo(playerData) {
+  const playerAvatar = document.getElementById("avatarLink");
+  playerAvatar.setAttribute("src", playerData.avatarLink);
+
+  const playerName = document.getElementById("nickname");
+  playerName.textContent = playerData.nickname;
+  playerName.setAttribute("href", "https://steamcommunity.com/profiles/" + playerData.steamID);
+
+  const loginButton = document.getElementById("loginButton");
+  loginButton.style.display = "none";
+
+  const logoutButton = document.getElementById("logoutButton");
+  logoutButton.style.display = "block";
 }
 
 
