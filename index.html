@@ -83,7 +83,7 @@
           </div>
         </div>
     <!-- Add a placeholder for the Twitch embed -->
-    <div id="twitch-live"></div>
+    <div id="twitch-live" class="hide"></div>
     <div id="twitch-clips">
       <iframe
         src="https://clips.twitch.tv/embed?clip=EsteemedHomelyWebLitty-scn1Y3GjrF0wnzTy&parent=www.lobbysquad.com.br&autoplay=true"
@@ -100,22 +100,15 @@
 
     <!-- Create a Twitch.Embed object that will render within the "twitch-live" element. -->
     <script type="text/javascript">
-      var embed = new Twitch.Embed("twitch-live", {
+      var player = new Twitch.Player("twitch-live", {
         width: 854,
         height: 480,
         channel: "dotalobbysquad",
         layout: "video",
-        autoplay: false,
+        autoplay: true,
         // Only needed if this page is going to be embedded on other websites
         parent: ["www.lobbysquad.com.br", "lobbysquad.com.br"]
       });
-
-      embed.addEventListener(Twitch.Embed.VIDEO_READY, () => {
-        var player = embed.getPlayer();
-        player.play();
-      });
-
-
 
       // Variáveis globais
       let clips;
@@ -252,57 +245,31 @@
       }
 
       function checkIfUserIsStreaming(username) {
-      var xhr = new XMLHttpRequest();
-      var url = "https://gql.twitch.tv/gql";
-      var query = `
-        query {
-          user(login: "${username}") {
-            stream {
-              id
-            }
-          }
+        player.addEventListener(Twitch.Player.READY, initiate)
+
+        function initiate() {
+          player.addEventListener(Twitch.Player.ONLINE, handleOnline);
+          player.addEventListener(Twitch.Player.OFFLINE, handleOffline);
+          player.removeEventListener(Twitch.Player.READY, initiate);
         }
-      `;
 
-      var data = JSON.stringify({
-        query: query,
-        variables: {}
-      });
-
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader("Client-ID", "kimne78kx3ncx6brgo4mv6wki5h1ko");
-      xhr.setRequestHeader("Content-Type", "application/json");
-
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          var response = JSON.parse(xhr.responseText);
-          if (
-            response.data &&
-            response.data.user &&
-            response.data.user.stream &&
-            response.data.user.stream.id
-          ) {
-            // Canal está em live
-            document.getElementById("twitch-live").style.display = "block";
-            document.getElementById("twitch-clips").style.display = "none";
-            document.getElementById("nextClipButton").style.display = "none";
-          } else {
-            // Canal não está em live
-            document.getElementById("twitch-live").style.display = "none";
-            document.getElementById("twitch-clips").style.display = "block";
-            document.getElementById("nextClipButton").style.display = "";
-            getPopularClipsFromChannel('dotalobbysquad',qtdClips);
-
-
-            
-            
-          }
+        function handleOnline() {
+          document.getElementById("twitch-live").classList.remove('hide');
+          document.getElementById("twitch-clips").classList.add('hide');
+          player.removeEventListener(Twitch.Player.ONLINE, handleOnline);
+          player.addEventListener(Twitch.Player.OFFLINE, handleOffline);
+          player.setMuted(false);
         }
-      };
 
-      xhr.send(data);
-    }
-
+        function handleOffline() {
+          document.getElementById("twitch-live").classList.add('hide');
+          document.getElementById("twitc-clips").classList.remove('hide');
+          player.removeEventListener(Twitch.Player.OFFLINE, handleOffline);
+          player.addEventListener(Twitch.Player.ONLINE, handleOnline);
+          player.setMuted(true);
+          getPopularClipsFromChannel('dotalobbysquad',qtdClips);    
+          }
+        };
     checkIfUserIsStreaming("dotalobbysquad");
 
     </script>
@@ -787,9 +754,6 @@
           margin-top: 20px;
       }
   </style>
-
-
-
 
   <!-- Template Main JS File -->
   <script src="static/assets/js/main.js"></script>
