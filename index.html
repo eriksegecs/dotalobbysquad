@@ -79,7 +79,7 @@
           <div class="btns">
             <a href="https://discord.gg/7hStVBeWsQ" class="btn-menu animated fadeInUp scrollto">Discord</a>
             <a href="https://www.twitch.tv/dotalobbysquad" class="btn-book animated fadeInUp scrollto">Twitch</a>
-            <h1 id="nextClipButton" class="btn-book animated fadeInUp scrollto" onclick="nextClip()">Próximo Clip</h1>
+            <a href="#" id="nextClipButton" class="btn-book animated fadeInUp scrollto" onclick="nextClip()">Próximo Clip</a>
           </div>
         </div>
     <!-- Add a placeholder for the Twitch embed -->
@@ -289,6 +289,7 @@
             document.getElementById("twitch-clips").style.display = "block";
             document.getElementById("nextClipButton").style.display = "";
             getPopularClipsFromChannel('dotalobbysquad',qtdClips);
+            updateIframeSlug();
 
             
             
