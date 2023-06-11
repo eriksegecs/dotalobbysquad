@@ -127,7 +127,7 @@
         const query = `
           query {
             user(login: "${channelName}") {
-              clips(first: 10) {
+              clips(first: 100) {
                 edges {
                   node {
                     id
@@ -186,8 +186,37 @@
           $("#twitch-clips").find("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`);
           //iframe.src = `https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`;
 
-          // Atualizar o índice do clipe para o próximo, retornando ao primeiro item quando atingir o final da lista
-          clipIndex = (clipIndex + 1) % clips.length;
+          // Cria uma cópia da lista original de clipes
+          var clipsCompleto = [...clips];
+          
+          // Função para obter um item aleatório da lista
+          function getRandomClip() {
+            // Verifica se todos os itens já foram exibidos
+            if (clipIndex >= clips.length) {
+              // Se todos os itens foram exibidos, redefine a lista para o estado original
+              clipsCompleto = [...clips];
+              clipIndex = 0;
+            }
+
+            // Obtém um índice aleatório que não tenha sido exibido ainda
+            var randomIndex = Math.floor(Math.random() * (clips.length - clipIndex)) + clipIndex;
+
+            // Obtém o item aleatório da lista
+            var randomClip = clips[randomIndex];
+
+            // Remove o item aleatório da lista para não repeti-lo
+            clips.splice(randomIndex, 1);
+
+            // Incrementa o índice do item atual
+            clipIndex++;
+
+            // Retorna o item aleatório
+            return randomClip;
+          }
+
+          // Exemplo de uso
+          clipIndex = getRandomClip();
+
         }
       }
 
