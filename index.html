@@ -86,7 +86,7 @@
     <div id="twitch-live"></div>
     <div id="twitch-clips">
       <iframe
-        src="https://clips.twitch.tv/embed?clip=EsteemedHomelyWebLitty-scn1Y3GjrF0wnzTy&parent=lobbysquad.com.br&autoplay=true"
+        src="https://clips.twitch.tv/embed?clip=EsteemedHomelyWebLitty-scn1Y3GjrF0wnzTy&parent=www.lobbysquad.com.br&autoplay=true"
         height="480"
         width="854"
         allowfullscreen>
@@ -218,8 +218,8 @@
               const iframe = document.querySelector('iframe');
               if (iframe && clips.length > 0) {
                 const slug = clips[clipIndex].node.slug;
-                $("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=lobbysquad.com.br&autoplay=true`);
-                iframe.src = `https://clips.twitch.tv/embed?clip=${slug}&parent=lobbysquad.com.br&autoplay=true`;
+                $("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`);
+                iframe.src = `https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`;
 
                 // Atualizar o índice do clipe para o próximo, retornando ao primeiro item quando atingir o final da lista
                 clipIndex = (clipIndex + 1) % clips.length;
