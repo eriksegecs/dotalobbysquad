@@ -183,7 +183,7 @@
         const iframe = document.getElementById("twitch-clips");
         if (iframe && clips.length > 0) {
           const slug = clips[clipIndex].node.slug;
-          $("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`);
+          $("#twitch-clips").find("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`);
           //iframe.src = `https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`;
 
           // Atualizar o índice do clipe para o próximo, retornando ao primeiro item quando atingir o final da lista
