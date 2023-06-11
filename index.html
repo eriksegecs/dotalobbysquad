@@ -170,8 +170,10 @@
 
               // Faça o que desejar com os clipes populares do canal aqui
               console.log(clips);
-                        // Cria uma cópia da lista original de clipes
+              // Cria uma cópia da lista original de clipes
               clipsCompleto = [...clips];
+              //atualiza o qtdClips
+              qtdClips = clips.length;
 
             } else {
               console.log('Nenhum clipe popular encontrado para o canal.');
@@ -202,9 +204,6 @@
             // Obtém um índice aleatório que não tenha sido exibido ainda
             var randomIndex = Math.floor(Math.random() * (clips.length - clipIndex)) + clipIndex;
 
-            // Obtém o item aleatório da lista
-            var randomClip = clips[randomIndex];
-
             // Remove o item aleatório da lista para não repeti-lo
             clips.splice(randomIndex, 1);
 
@@ -212,7 +211,7 @@
             clipIndex++;
 
             // Retorna o item aleatório
-            return randomClip;
+            return randomIndex;
           }
 
           // Exemplo de uso
