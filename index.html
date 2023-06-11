@@ -84,7 +84,7 @@
         </div>
     <!-- Add a placeholder for the Twitch embed -->
     <div id="twitch-live" class="hide"></div>
-    <div id="twitch-clips">
+    <div id="twitch-clips" class="hide">
       <iframe
         src="https://clips.twitch.tv/embed?clip=EsteemedHomelyWebLitty-scn1Y3GjrF0wnzTy&parent=www.lobbysquad.com.br&autoplay=true"
         height="480"
@@ -263,7 +263,7 @@
 
         function handleOffline() {
           document.getElementById("twitch-live").classList.add('hide');
-          document.getElementById("twitc-clips").classList.remove('hide');
+          document.getElementById("twitch-clips").classList.remove('hide');
           player.removeEventListener(Twitch.Player.OFFLINE, handleOffline);
           player.addEventListener(Twitch.Player.ONLINE, handleOnline);
           player.setMuted(true);
