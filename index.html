@@ -119,15 +119,17 @@
 
       // Variáveis globais
       let clips;
-      let clipIndex = 0;
+      let clipsCompleto;
+      let qtdClips = 100;
+      let clipIndex = Math.floor(Math.random() * (qtdClips + 1));
 
       // Função para obter os clipes mais populares do canal
-      function getPopularClipsFromChannel(channelName) {
+      function getPopularClipsFromChannel(channelName,qtdClips) {
         const url = 'https://gql.twitch.tv/gql';
         const query = `
           query {
             user(login: "${channelName}") {
-              clips(first: 100) {
+              clips(first: ${qtdClips}) {
                 edges {
                   node {
                     id
@@ -168,6 +170,8 @@
 
               // Faça o que desejar com os clipes populares do canal aqui
               console.log(clips);
+                        // Cria uma cópia da lista original de clipes
+              clipsCompleto = [...clips];
 
             } else {
               console.log('Nenhum clipe popular encontrado para o canal.');
@@ -182,12 +186,9 @@
       function updateIframeSlug() {
         const iframe = document.getElementById("twitch-clips");
         if (iframe && clips.length > 0) {
-          const slug = clips[clipIndex].node.slug;
-          $("#twitch-clips").find("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`);
           //iframe.src = `https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`;
 
-          // Cria uma cópia da lista original de clipes
-          var clipsCompleto = [...clips];
+
           
           // Função para obter um item aleatório da lista
           function getRandomClip() {
@@ -216,6 +217,10 @@
 
           // Exemplo de uso
           clipIndex = getRandomClip();
+
+          // Obtém o slug do item aleatório e passa para o iframe
+          const slug = clips[clipIndex].node.slug;
+          $("#twitch-clips").find("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`);
 
         }
       }
