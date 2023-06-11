@@ -79,17 +79,25 @@
           <div class="btns">
             <a href="https://discord.gg/7hStVBeWsQ" class="btn-menu animated fadeInUp scrollto">Discord</a>
             <a href="https://www.twitch.tv/dotalobbysquad" class="btn-book animated fadeInUp scrollto">Twitch</a>
+            <a id="nextClipButton" class="book-a-table-btn scrollto" onclick="nextClip()">Próximo Clip</a>
           </div>
         </div>
     <!-- Add a placeholder for the Twitch embed -->
-    <div id="twitch-embed"></div>
-
+    <div id="twitch-live"></div>
+    <div id="twitch-clips">
+      <iframe
+        src="https://clips.twitch.tv/embed?clip=EsteemedHomelyWebLitty-scn1Y3GjrF0wnzTy&parent=lobbysquad.com.br&autoplay=true"
+        height="480"
+        width="854"
+        allowfullscreen>
+      </iframe>
+    </div>
     <!-- Load the Twitch embed script -->
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
 
-    <!-- Create a Twitch.Embed object that will render within the "twitch-embed" element. -->
+    <!-- Create a Twitch.Embed object that will render within the "twitch-live" element. -->
     <script type="text/javascript">
-      var embed = new Twitch.Embed("twitch-embed", {
+      var embed = new Twitch.Embed("twitch-live", {
         width: 854,
         height: 480,
         channel: "dotalobbysquad",
@@ -136,10 +144,114 @@
             response.data.user.stream.id
           ) {
             // Canal está em live
-            document.getElementById("twitch-embed").style.display = "block";
+            document.getElementById("twitch-live").style.display = "block";
+            document.getElementById("twitch-clips").style.display = "none";
           } else {
             // Canal não está em live
-            document.getElementById("twitch-embed").style.display = "none";
+            document.getElementById("twitch-live").style.display = "none";
+            document.getElementById("twitch-clips").style.display = "block";
+            // Variáveis globais
+            let clips;
+            let clipIndex = 0;
+
+            // Função para obter os clipes mais populares do canal
+            function getPopularClipsFromChannel(channelName) {
+              const url = 'https://gql.twitch.tv/gql';
+              const query = `
+                query {
+                  user(login: "${channelName}") {
+                    clips(first: 10) {
+                      edges {
+                        node {
+                          id
+                          title
+                          url
+                          viewCount
+                          durationSeconds
+                          slug
+                        }
+                      }
+                    }
+                  }
+                }
+              `;
+
+              const data = {
+                query: query,
+                variables: {}
+              };
+
+              fetch(url, {
+                method: 'POST',
+                headers: {
+                  'Client-ID': 'kimne78kx3ncx6brgo4mv6wki5h1ko',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+              })
+                .then(response => response.json())
+                .then(responseData => {
+                  if (
+                    responseData.data &&
+                    responseData.data.user &&
+                    responseData.data.user.clips &&
+                    responseData.data.user.clips.edges.length > 0
+                  ) {
+                    clips = responseData.data.user.clips.edges;
+
+                    // Faça o que desejar com os clipes populares do canal aqui
+                    console.log(clips);
+
+                    // Atualizar o slug do iframe
+                    updateIframeSlug();
+                  } else {
+                    console.log('Nenhum clipe popular encontrado para o canal.');
+                  }
+                })
+                .catch(error => {
+                  console.error('Ocorreu um erro ao buscar os clipes populares do canal:', error);
+                });
+            }
+
+            // Função para atualizar o slug do iframe
+            function updateIframeSlug() {
+              const iframe = document.querySelector('iframe');
+              if (iframe && clips.length > 0) {
+                const slug = clips[clipIndex].node.slug;
+                $("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=lobbysquad.com.br&autoplay=true`);
+                iframe.src = `https://clips.twitch.tv/embed?clip=${slug}&parent=lobbysquad.com.br&autoplay=true`;
+
+                // Atualizar o índice do clipe para o próximo, retornando ao primeiro item quando atingir o final da lista
+                clipIndex = (clipIndex + 1) % clips.length;
+              }
+            }
+
+            // Obtendo o botão "Reproduzir novamente"
+            const botaoReproduzirNovamente = document.querySelector('button[data-a-target="player-play-pause-button"]');
+
+            // Adicionando um observador de mutação para o atributo "aria-label" do botão
+            const observadorMutacao = new MutationObserver(function(mutationsList) {
+              for (let mutation of mutationsList) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'aria-label') {
+                  const novaLabel = mutation.target.getAttribute('aria-label');
+                  if (novaLabel === 'Reproduzir novamente (espaço/k)') {
+                    // Chamando a função para obter os clipes populares do canal e atualizar o slug do iframe
+                    getPopularClipsFromChannel('dotalobbysquad');
+                  }
+                }
+              }
+            });
+
+            // Iniciando a observação de mutações no botão
+            //observadorMutacao.observe(botaoReproduzirNovamente, { attributes: true });
+            getPopularClipsFromChannel('dotalobbysquad');
+
+            function nextClip() {
+              // Atualizar o slug do iframe
+              updateIframeSlug();
+            }
+
+            
           }
         }
       };

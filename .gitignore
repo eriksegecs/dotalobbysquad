@@ -5,3 +5,4 @@ build/
 next-env.d.ts
 node_modules/
 out/
+getPopularClipsFromChanne.js
