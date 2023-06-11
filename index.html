@@ -123,6 +123,47 @@
       let qtdClips = 100;
       let clipIndex = Math.floor(Math.random() * (qtdClips));
 
+      // Função para atualizar o slug do iframe
+      function updateIframeSlug() {
+        const iframe = document.getElementById("twitch-clips");
+        if (iframe && clips.length > 0) {
+          //iframe.src = `https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`;
+
+
+          
+          // Função para obter um item aleatório da lista
+          function getRandomClip() {
+            // Verifica se todos os itens já foram exibidos
+            if (clipIndex >= clips.length) {
+              // Se todos os itens foram exibidos, redefine a lista para o estado original
+              clipsCompleto = [...clips];
+              clipIndex = 0;
+            }
+
+            // Obtém um índice aleatório que não tenha sido exibido ainda
+            const randomIndex = Math.floor(Math.random() * clips.length);
+
+            // Remove o item aleatório da lista para não repeti-lo
+            clips.splice(randomIndex, 1);
+
+            // Incrementa o índice do item atual
+            clipIndex++;
+
+            // Retorna o item aleatório
+            return randomIndex;
+          }
+
+          // Exemplo de uso
+          clipIndex = getRandomClip();
+
+          // Obtém o slug do item aleatório e passa para o iframe
+          const slug = clips[clipIndex].node.slug;
+          $("#twitch-clips").find("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`);
+
+        }
+      }
+
+
       // Função para obter os clipes mais populares do canal
       function getPopularClipsFromChannel(channelName,qtdClips) {
         const url = 'https://gql.twitch.tv/gql';
@@ -175,6 +216,9 @@
               //atualiza o qtdClips
               qtdClips = clips.length;
 
+              //atualiza o index para mostrar o primeiro video aleatorio
+              updateIframeSlug();
+
             } else {
               console.log('Nenhum clipe popular encontrado para o canal.');
             }
@@ -184,45 +228,6 @@
           });
       }
 
-      // Função para atualizar o slug do iframe
-      function updateIframeSlug() {
-        const iframe = document.getElementById("twitch-clips");
-        if (iframe && clips.length > 0) {
-          //iframe.src = `https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`;
-
-
-          
-          // Função para obter um item aleatório da lista
-          function getRandomClip() {
-            // Verifica se todos os itens já foram exibidos
-            if (clipIndex >= clips.length) {
-              // Se todos os itens foram exibidos, redefine a lista para o estado original
-              clipsCompleto = [...clips];
-              clipIndex = 0;
-            }
-
-            // Obtém um índice aleatório que não tenha sido exibido ainda
-            const randomIndex = Math.floor(Math.random() * clips.length);
-
-            // Remove o item aleatório da lista para não repeti-lo
-            clips.splice(randomIndex, 1);
-
-            // Incrementa o índice do item atual
-            clipIndex++;
-
-            // Retorna o item aleatório
-            return randomIndex;
-          }
-
-          // Exemplo de uso
-          clipIndex = getRandomClip();
-
-          // Obtém o slug do item aleatório e passa para o iframe
-          const slug = clips[clipIndex].node.slug;
-          $("#twitch-clips").find("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`);
-
-        }
-      }
 
       // Obtendo o botão "Reproduzir novamente"
       const botaoReproduzirNovamente = document.querySelector('button[data-a-target="player-play-pause-button"]');
@@ -245,9 +250,6 @@
         // Atualizar o slug do iframe
         updateIframeSlug();
       }
-
-      updateIframeSlug();
-
 
       function checkIfUserIsStreaming(username) {
       var xhr = new XMLHttpRequest();
@@ -302,8 +304,6 @@
     }
 
     checkIfUserIsStreaming("dotalobbysquad");
-
-    updateIframeSlug();
 
     </script>
       </div>
