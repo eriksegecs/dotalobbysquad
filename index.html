@@ -202,7 +202,7 @@
             }
 
             // Obtém um índice aleatório que não tenha sido exibido ainda
-            var randomIndex = Math.floor(Math.random() * (clips.length - clipIndex)) + clipIndex;
+            const randomIndex = Math.floor(Math.random() * clips.length);
 
             // Remove o item aleatório da lista para não repeti-lo
             clips.splice(randomIndex, 1);
