@@ -256,6 +256,7 @@
         function handleOnline() {
           document.getElementById("twitch-live").classList.remove('hide');
           document.getElementById("twitch-clips").classList.add('hide');
+          document.getElementById("nextClipButton").classList.add('hide');
           player.removeEventListener(Twitch.Player.ONLINE, handleOnline);
           player.addEventListener(Twitch.Player.OFFLINE, handleOffline);
           player.setMuted(false);
@@ -264,6 +265,7 @@
         function handleOffline() {
           document.getElementById("twitch-live").classList.add('hide');
           document.getElementById("twitch-clips").classList.remove('hide');
+          document.getElementById("nextClipButton").classList.remove('hide');
           player.removeEventListener(Twitch.Player.OFFLINE, handleOffline);
           player.addEventListener(Twitch.Player.ONLINE, handleOnline);
           player.setMuted(true);
