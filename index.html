@@ -767,7 +767,6 @@
       
       fetch('https://www.lobbysquad.com.br/api/v1/mmr?mmr_atual=' + mmrAtual)
           .then(function(response) {
-              let matchs = response.json();
               return response.json();
           })
           .then(function(data) {
