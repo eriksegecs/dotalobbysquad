@@ -876,38 +876,42 @@
             list.appendChild(listItem);
           });
         });
+        // Evento de seleção de intervalo
+        document.getElementById('chart').on('plotly_selected', function(eventData) {
+          if (eventData) {
+            var selectedData = [];
+
+            // Obtém os dados selecionados
+            eventData.points.forEach(function(point) {
+              var trace = dados[point.curveNumber];
+              selectedData.push({x: trace.x[point.pointNumber], y: trace.y[point.pointNumber]});
+            });
+
+            // Atualiza a tabela
+            atualizarTabela(selectedData);
+          }
+        });
+
+        // Função para atualizar a tabela
+        function atualizarTabela(dadosSelecionados) {
+          var tabela = document.getElementById('chart-table');
+          tabela.innerHTML = ''; // Limpa a tabela
+
+          // Cria as linhas da tabela com os dados selecionados
+          dadosSelecionados.forEach(function(dado) {
+            var row = tabela.insertRow();
+            var cellX = row.insertCell();
+            var cellY = row.insertCell();
+            cellX.textContent = dado.x;
+            cellY.textContent = dado.y;
+          });
+        }
+
+
+
       });
   });
-  // Evento de seleção de intervalo
-  document.getElementById('chart').on('plotly_selected', function(eventData) {
-    if (eventData) {
-      var selectedData = [];
-
-      // Obtém os dados selecionados
-      eventData.points.forEach(function(point) {
-        var trace = dados[point.curveNumber];
-        selectedData.push({x: trace.x[point.pointNumber], y: trace.y[point.pointNumber]});
-      });
-
-      // Atualiza a tabela
-      atualizarTabela(selectedData);
-    }
-  });
-
-  // Função para atualizar a tabela
-  function atualizarTabela(dadosSelecionados) {
-    var tabela = document.getElementById('chart-table');
-    tabela.innerHTML = ''; // Limpa a tabela
-
-    // Cria as linhas da tabela com os dados selecionados
-    dadosSelecionados.forEach(function(dado) {
-      var row = tabela.insertRow();
-      var cellX = row.insertCell();
-      var cellY = row.insertCell();
-      cellX.textContent = dado.x;
-      cellY.textContent = dado.y;
-    });
-  }
+ 
   
 // Função para salvar as informações do jogador no localStorage
 function savePlayerInfo(playerData) {
@@ -1054,15 +1058,9 @@ function logout() {
   // Delete steamid cookie
   document.cookie = "steamid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-  // Redirect the user to the logout page or any other desired destination
-  window.location.href = "https://www.example.com/logout";
+  // Delete playerInfo from localStorage
+  localStorage.removeItem('playerInfo');
 }
-
-
-
-
-
-
   
 </script>
 
