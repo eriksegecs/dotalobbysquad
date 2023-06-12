@@ -322,6 +322,13 @@
       <input type="number" id="mmr-input" />
       <button id="mmr-button">Calcular</button>
       <div id="chart"></div>
+      <div id="chart-table-div"></div>
+      <table id="chart-table">
+        <tr>
+          <th>Date</th>
+          <th>MMR</th>
+        </tr>
+      </table>
       <ul id="selected-list"></ul>
 
     </div>
@@ -871,6 +878,36 @@
         });
       });
   });
+  // Evento de seleção de intervalo
+  document.getElementById('chart').on('plotly_selected', function(eventData) {
+    if (eventData) {
+      var selectedData = [];
+
+      // Obtém os dados selecionados
+      eventData.points.forEach(function(point) {
+        var trace = dados[point.curveNumber];
+        selectedData.push({x: trace.x[point.pointNumber], y: trace.y[point.pointNumber]});
+      });
+
+      // Atualiza a tabela
+      atualizarTabela(selectedData);
+    }
+  });
+
+  // Função para atualizar a tabela
+  function atualizarTabela(dadosSelecionados) {
+    var tabela = document.getElementById('chart-table');
+    tabela.innerHTML = ''; // Limpa a tabela
+
+    // Cria as linhas da tabela com os dados selecionados
+    dadosSelecionados.forEach(function(dado) {
+      var row = tabela.insertRow();
+      var cellX = row.insertCell();
+      var cellY = row.insertCell();
+      cellX.textContent = dado.x;
+      cellY.textContent = dado.y;
+    });
+  }
   
 // Função para salvar as informações do jogador no localStorage
 function savePlayerInfo(playerData) {
