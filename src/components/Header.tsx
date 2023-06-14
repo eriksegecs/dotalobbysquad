@@ -1,7 +1,7 @@
 
 export function Header() {
     return (
-        <nav className="sticky top-0 w-full fixed flex items-center justify-between flex-wrap bg-zinc-900 p-6 lg:pl-40">
+        <nav className="z-50 sticky top-0 w-full fixed flex items-center justify-between flex-wrap bg-zinc-900 p-6 lg:pl-40">
 
             <div className="flex items-center flex-shrink-0 text-white mr-6">
                 <span className="font-alt uppercase text-2xl tracking-tight">DotaLobbySquad</span>
@@ -21,7 +21,7 @@ export function Header() {
                 <a href="#responsive-header" className="font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-white hover:text-yellow-300 mr-4 lg:pl-4">Tabela</a>
                 <a href="#responsive-header" className="font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-white hover:text-yellow-300 mr-4 lg:pl-4">Chaves</a>
                 <a href="#responsive-header" className="font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-white hover:text-yellow-300 mr-4 lg:pl-4">Equipe</a>
-                <a href="#responsive-header" className="font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-white hover:text-yellow-300 mr-4 lg:pl-4">Bordões</a>
+                <a href="#responsive-header" className="z-100 font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-white hover:text-yellow-300 mr-4 lg:pl-4">Bordões</a>
                 </div>
 
                 <div className="items-end">

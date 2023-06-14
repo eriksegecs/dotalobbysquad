@@ -17,8 +17,8 @@ export function About() {
                     </ul>
                     <p className="font-sans text-white text-lg ml-4">Enquanto você lia, o Magus morreu 37 vezes.</p>
                 </div>
-                <div className="lg:w-1/2 order-1 lg:order-2">
-                    <Image src={AboutImage} className="transform hover:scale-105 duration-500 ease-in-out" alt="twitch" />
+                <div className="z-0 lg:w-1/2  order-1 lg:order-2 ">
+                    <Image src={AboutImage} className="z-0 transform hover:scale-105 duration-500 ease-in-out border-none" alt="twitch" />
                 </div>
             </div>
         </div>
