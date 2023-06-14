@@ -1,7 +1,7 @@
 
 export function Table() {
     return (
-        <section id="Tabela" className="z-0 bg-black p-6">
+        <section id="Tabela" className="z-git0 bg-black p-6">
             <div className="" data-aos="fade-up">
                 <div>
                     <p>Tabela</p>
