@@ -1,27 +1,42 @@
+'use client'
+
+import Image from 'next/image'
+import menu from '../assets/menu.svg'
+import { useState } from 'react';
 
 export function Header() {
+    const [isMenuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuOpen(!isMenuOpen);
+    };
+    
     return (
-        <nav className="z-50 sticky top-0 w-full fixed flex items-center justify-between flex-wrap bg-gray-900 p-8 border border-b-yellow-200 border-x-transparent p-6 lg:pl-40">
-            <div className="flex items-center flex-shrink-0 text-white mr-6">
-                <span className="font-alt uppercase text-2xl tracking-tight">DotaLobbySquad</span>
-            </div>
-            
-            <div className="block lg:hidden">
-                <button className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-                    <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-                </button>
-            </div>
-            <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                <div className="text-sm lg:flex-grow lg:pl-20 items-center">
-                    <a href="https://www.lobbysquad.com.br/" className="font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-yellow-300 hover:text-yellow-300 mr-4">Home</a>
-                    <a href="#responsive-header" className="font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-white hover:text-yellow-300 mr-4 lg:pl-4">Conteúdo</a>
-                    <a href="#responsive-header" className="font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-white hover:text-yellow-300 mr-4 lg:pl-4">MMR</a>
-                    <a href="#responsive-header" className="font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-white hover:text-yellow-300 mr-4 lg:pl-4">Tabela</a>
-                    <a href="#responsive-header" className="font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-white hover:text-yellow-300 mr-4 lg:pl-4">Chaves</a>
-                    <a href="#responsive-header" className="font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-white hover:text-yellow-300 mr-4 lg:pl-4">Equipe</a>
-                    <a href="#responsive-header" className="z-100 font-alt block mt-4 lg:inline-block lg:mt-0 text-sm text-white hover:text-yellow-300 mr-4 lg:pl-4">Bordões</a>
+        <nav className="z-50 sticky lg:top-0 w-full flex ss:flex-wrap justify-center p-4 bg-gray-900 border border-b-yellow-200 border-x-transparent text-white">
+            <div className='mr-6 flex ss:w-full w-auto ss:justify-between'>
+                <div className='flex flex-wrap'>
+                    <span className="font-alt uppercase text-3xl tracking-tight">DotaLobbySquad</span>
                 </div>
-                <a href="#" className="inline-block text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-300 rounded-full text-white hover:bg-yellow-300 mt-4 lg:mt-0 mr-20 font-bold tracking-widest">Login</a>
+                <div className="lg:hidden">
+                    <button className="px-3 py-2 border rounded border-teal-400 hover:border-white" onClick={toggleMenu}>
+                        <Image className="" src={menu} alt="menu"/>
+                    </button>
+                </div>
+            </div>
+            <div className={`ss:w-full w-auto ${isMenuOpen ? 'block' : 'hidden'} flex lg:items-center justify-between`}>
+                <div className="text-sm md:flex-grow items-center font-alt text-sm  flex-shrink-0">
+                    <a href="https://www.lobbysquad.com.br/" className="block lg:inline-block lg:mt-0 text-yellow-300 hover:text-yellow-300 mr-4">Home</a>
+                    <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Conteúdo</a>
+                    <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">MMR</a>
+                    <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Tabela</a>
+                    <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Chaves</a>
+                    <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Equipe</a>
+                    <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Bordões</a>
+                    <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Regras</a>
+                </div>
+                <div className='mt-6 lg:mt-0'>
+                    <a href="#" className="text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-300 rounded-full hover:bg-yellow-300 font-bold tracking-widest">Login</a>
+                </div>
             </div>
         </nav>
     )   
