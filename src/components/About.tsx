@@ -6,7 +6,7 @@ import checkCircle from '../assets/check-circle.svg'
 export function About() {
     return (
         <div className="bg-black p-6">
-            <div className="flex flex-wrap m-20 p-6 content-center justify-center items-center justify-items-center">
+            <div className="flex flex-wrap m-20 p-6 justify-center items-center">
                 <div className="lg:w-1/2 order-2 lg:order-1">
                     <h3 className="font-alt text-2xl text-white m-4">Transmissão ao vivo dos jogos</h3>
                     <ul>
@@ -17,7 +17,7 @@ export function About() {
                     </ul>
                     <p className="font-sans text-white text-lg ml-4">Enquanto você lia, o Magus morreu 37 vezes.</p>
                 </div>
-                <div className="z-0 lg:w-1/2  order-1 lg:order-2 ">
+                <div className="z-0 lg:w-1/2 order-1 lg:order-2 ">
                     <Image src={AboutImage} className="z-0 transform hover:scale-105 duration-500 ease-in-out border-none" alt="twitch" />
                 </div>
             </div>

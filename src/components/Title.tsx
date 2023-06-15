@@ -1,21 +1,24 @@
 
+import Image from 'next/image'
+import AboutImage from '../assets/twitch.png'
 
 export function Title() {
     return (
-        <section id="hero" className="bg-auto bg-cover bg-center min-h-screen lg:bg-fixed items-center bg-[url(../assets/forest.gif)]">
+        <section id="hero" className="bg-auto bg-cover bg-center min-h-screen lg:bg-fixed bg-[url(../assets/forest.gif)]">
 
-            <div className="text-center py-52">
-            <div className="row">
-                <div className="col-lg-8">
-                <h1 className="text-5xl font-bold text-white">Dota<span className="text-yellow-300"> Lobby Squad</span></h1>
-                <h2 className="text-2xl text-white">"Briga de ruins, qual é a graça?"</h2>
-            
-                <div className="btns">
-                    <a href="https://discord.gg/7hStVBeWsQ" className="btn-menu animated fadeInUp scrollto">Discord</a>
-                    <a href="https://www.twitch.tv/dotalobbysquad" className="btn-book animated fadeInUp scrollto">Twitch</a>
+            <div className="md:flex-row lg:flex sm:flex-col text-center items-center justify-center lg:space-x-96">
+                <div className="relative lg:pt-[450px] pt-[50px] order-1 col-lg-8">
+                    <h1 className="text-5xl font-bold text-white font-sans">Dota<span className="text-yellow-300">Lobby Squad</span></h1>
+                    <h2 className="text-2xl text-white">"Briga de ruins, qual é a graça?"</h2>
+                    <div className="my-10">
+                        <a href="https://discord.gg/7hStVBeWsQ" className="inline-block text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-300 rounded-full text-white font-bold hover:bg-yellow-300 mt-4 lg:mt-0 m-5 tracking-widest">Discord</a>
+                        <a href="https://www.twitch.tv/dotalobbysquad" className="inline-block text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-300 rounded-full text-white font-bold hover:bg-yellow-300 mt-4 lg:mt-0 m-5 tracking-widest">Twitch</a>
+                    </div>
                 </div>
+                <div className="relative lg:w-2/5 p-2 order-2 m-4">
+                    <Image src={AboutImage} className="z-0 lg:pt-[200px] border-none" alt="twitch" />
+                    <a href="https://www.twitch.tv/dotalobbysquad" className="absolute right-0 text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-300 rounded-full text-white font-bold hover:bg-yellow-300 mt-4">Próximo Clip</a>
                 </div>
-            </div>
             </div>
         </section>
     )   
