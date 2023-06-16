@@ -23,7 +23,7 @@ export function Header() {
                     </button>
                 </div>
             </div>
-            <div className={`ss:w-full w-auto ${isMenuOpen ? 'block' : 'hidden'} flex lg:items-center justify-between`}>
+            <div className={`ss:w-full w-auto ${isMenuOpen ? 'block' : 'ss:hidden'} flex lg:items-center justify-between`}>
                 <div className="text-sm md:flex-grow items-center font-alt text-sm  flex-shrink-0">
                     <a href="https://www.lobbysquad.com.br/" className="block lg:inline-block lg:mt-0 text-yellow-300 hover:text-yellow-300 mr-4">Home</a>
                     <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Conteúdo</a>
