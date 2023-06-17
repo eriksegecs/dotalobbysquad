@@ -1,7 +1,7 @@
 
 export function Mmr() {
     return (
-        <section id="MMR" className="mx-auto bg-[#1a1814]">
+        <section id="mmr" className="mx-auto bg-[#1a1814]">
             <div className="container mx-auto sm:px-4">
                 <div className="p-6 pb-10 text-4xl font-bold text-[#cda45e]">
                     <p>Calculadora de MMR Médio</p>

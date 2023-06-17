@@ -5,7 +5,6 @@ import { About } from '@/components/About'
 import { Mmr } from '@/components/Mmr'
 import { Table } from '@/components/Table'
 import { Tournament } from '@/components/Tournament'
-import { FakeComponent } from '@/components/FakeComponent'
 
 export default function Home() {
   return (

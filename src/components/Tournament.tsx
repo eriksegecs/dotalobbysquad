@@ -1,7 +1,7 @@
 
 export function Tournament() {
     return (
-        <section id="Chaves" className="mx-auto bg-[#1a1814]">
+        <section id="tournament" className="mx-auto bg-[#1a1814]">
             <div className="container mx-auto p-6 ps-8 text-4xl font-bold text-[#cda45e]">
                 <p>Chaves</p>
             </div>

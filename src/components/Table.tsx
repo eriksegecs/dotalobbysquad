@@ -1,7 +1,7 @@
 
 export function Table() {
     return (
-        <section id="Tabela" className="z-0 bg-black mx-auto p-6">
+        <section id="table" className="z-0 bg-black mx-auto p-6">
             <div className="container mx-auto p-6 ps-8 text-4xl font-bold text-[#cda45e]">
                 <p>Tabela</p>
             </div>
