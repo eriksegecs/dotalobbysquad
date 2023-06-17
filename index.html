@@ -86,7 +86,7 @@
     <div id="twitch-live" class="hide"></div>
     <div id="twitch-clips" class="hide">
       <iframe
-        src="https://clips.twitch.tv/embed?clip=EsteemedHomelyWebLitty-scn1Y3GjrF0wnzTy&parent=www.lobbysquad.com.br&autoplay=true"
+        src="static/assets/img/transmissão.png"
         height="480"
         width="854"
         allowfullscreen>
@@ -120,7 +120,7 @@
       function updateIframeSlug() {
         const iframe = document.getElementById("twitch-clips");
         if (iframe && clips.length > 0) {
-          //iframe.src = `https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`;
+          //iframe.src = `https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true&muted=true`;
 
 
           
@@ -151,7 +151,7 @@
 
           // Obtém o slug do item aleatório e passa para o iframe
           const slug = clips[clipIndex].node.slug;
-          $("#twitch-clips").find("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true`);
+          $("#twitch-clips").find("iframe").attr('src',`https://clips.twitch.tv/embed?clip=${slug}&parent=www.lobbysquad.com.br&autoplay=true&muted=true`);
 
         }
       }
