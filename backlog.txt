@@ -9,13 +9,13 @@ parsing dos jogos
 
 // Backlog - Front-End
 - Componente das Regras ✅20/06/2023
+- Estilização de botões da Navbar (os componentes selecionados devem ficar com a cor selecionada aplicada) ✅20/06/2023
 - Login completo : 
     botão de Logout;
     Cookies para armazenamento de Token e Reautenticação de Usuário;
     div com a imagem e nickname do usuário logado
 - Tela com os clips da Twitch
 - Componente com os Bordões da Comunidade
-- Estilização de botões da Navbar (os componentes selecionados devem ficar com a cor selecionada aplicada)
 - Estilização da imagem de background (deve conter um efeito escurecendo a imagem)
 
 

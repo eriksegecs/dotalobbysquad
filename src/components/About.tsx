@@ -5,7 +5,7 @@ import checkCircle from '../assets/check-circle.svg'
 
 export function About() {
     return (
-        <div id="about" className="bg-black p-6">
+        <section id="about" className="bg-black p-6">
             <div className="flex flex-wrap m-20 p-6 justify-center items-center">
                 <div className="lg:w-1/2 order-2 lg:order-1">
                     <h3 className="font-alt text-2xl text-white m-4">Transmissão ao vivo dos jogos</h3>
@@ -21,6 +21,6 @@ export function About() {
                     <Image src={AboutImage} className="z-0 transform hover:scale-105 duration-500 ease-in-out border-none" alt="twitch" />
                 </div>
             </div>
-        </div>
+        </section>
     )   
 }

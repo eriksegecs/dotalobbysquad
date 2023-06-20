@@ -3,7 +3,7 @@
 
 import Image from 'next/image'
 import menu from '../assets/menu.svg'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 
 export function Header() {
@@ -13,9 +13,32 @@ export function Header() {
         setMenuOpen(!isMenuOpen);
     };
 
-    function call() {
-        
-    }
+    const [activeSection, setActiveSection] = useState('');
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const sections = document.querySelectorAll('section');
+            let active = '';
+
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const scrollPosition = window.pageYOffset;
+
+                if (scrollPosition >= sectionTop - 50 && scrollPosition < sectionTop + sectionHeight - 50) {
+                    active = section.id;
+                }
+            });
+
+            setActiveSection(active);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
     
     return (
         <nav id="menu" className="z-50 sticky lg:top-0 w-full flex ss:flex-wrap justify-center p-4 bg-gray-900 border border-b-yellow-200 border-x-transparent text-white">
@@ -31,13 +54,13 @@ export function Header() {
             </div>
             <div className={`ss:w-full w-auto ${isMenuOpen ? 'block' : 'ss:hidden'} flex lg:items-center justify-between`}>
                 <div className="text-sm md:flex-grow items-center font-alt text-sm  flex-shrink-0">
-                    <a href="..#title" className="block lg:inline-block lg:mt-0 text-yellow-300 hover:text-yellow-300 mr-4">Home</a>
-                    <a href="..#about" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Conteúdo</a>
-                    <a href="..#mmr" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">MMR</a>
-                    <a href="..#table" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Tabela</a>
-                    <a href="..#tournament" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Chaves</a>
-                    <a href="..#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Bordões</a>
-                    <Link to="/rules"><a href="#rules" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Regras</a></Link>
+                    <a href="..#title" className={`block lg:inline-block lg:mt-0 ${activeSection === 'title' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4`}>Home</a>
+                    <a href="..#about" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'about' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Conteúdo</a>
+                    <a href="..#mmr" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'mmr' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>MMR</a>
+                    <a href="..#table" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'table' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Tabela</a>
+                    <a href="..#tournament" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'tournament' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Chaves</a>
+                    <a href="..#responsive-header" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'responsive-header' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Bordões</a>
+                    <Link to="/rules"><a href="#rules" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'rules' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Regras</a></Link>
                 </div>
                 <div className='mt-6 lg:mt-0'>
                     <a href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://www.lobbysquad.com.br/api/v1/auth/&openid.realm=https://www.lobbysquad.com.br/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select" className="text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-300 rounded-full hover:bg-yellow-300 font-bold tracking-widest">Login</a>
