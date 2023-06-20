@@ -1,0 +1,29 @@
+autenticação - 1 mês
+mercado de players
+marcação de jogos
+calendario de jogos
+criação de lobby automatico
+estatisticas dos jogos
+parsing dos jogos
+
+
+// Backlog - Front-End
+- Componente das Regras ✅20/06/2023
+- Login completo : 
+    botão de Logout;
+    Cookies para armazenamento de Token e Reautenticação de Usuário;
+    div com a imagem e nickname do usuário logado
+- Tela com os clips da Twitch
+- Componente com os Bordões da Comunidade
+- Estilização de botões da Navbar (os componentes selecionados devem ficar com a cor selecionada aplicada)
+- Estilização da imagem de background (deve conter um efeito escurecendo a imagem)
+
+
+// CMD utilizado para instalação das dependências de login via Next Auth e AWS Cognito
+npm install next react react-dom
+npm install next-auth aws-sdk
+npm install amazon-cognito-identity-js
+npm install aws-sdk passport-steam
+
+// CMD instalação do react-router-dom
+npm i react-router-dom@6

@@ -4,7 +4,7 @@ import AboutImage from '../assets/twitch.png'
 
 export function Title() {
     return (
-        <section id="hero" className="bg-auto bg-cover bg-center min-h-screen lg:bg-fixed bg-[url(../assets/forest.gif)]">
+        <section id="title" className="bg-auto bg-cover bg-center min-h-screen lg:bg-fixed bg-[url(../assets/forest.gif)]">
 
             <div className="md:flex-row lg:flex sm:flex-col text-center items-center justify-center lg:space-x-96">
                 <div className="relative lg:pt-[450px] pt-[50px] order-1 col-lg-8">

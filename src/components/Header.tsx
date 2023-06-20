@@ -1,8 +1,10 @@
+
 'use client'
 
 import Image from 'next/image'
 import menu from '../assets/menu.svg'
 import { useState } from 'react';
+import { Link } from 'react-router-dom'
 
 export function Header() {
     const [isMenuOpen, setMenuOpen] = useState(false);
@@ -19,7 +21,7 @@ export function Header() {
         <nav id="menu" className="z-50 sticky lg:top-0 w-full flex ss:flex-wrap justify-center p-4 bg-gray-900 border border-b-yellow-200 border-x-transparent text-white">
             <div className='mr-6 flex ss:w-full w-auto ss:justify-between'>
                 <div className='flex flex-wrap'>
-                    <span className="font-alt uppercase text-3xl tracking-tight">DotaLobbySquad</span>
+                    <a href='/' className="font-alt uppercase text-3xl tracking-tight">DotaLobbySquad</a>
                 </div>
                 <div className="lg:hidden">
                     <button className="px-3 py-2 border rounded border-teal-400 hover:border-white" onClick={toggleMenu}>
@@ -29,16 +31,16 @@ export function Header() {
             </div>
             <div className={`ss:w-full w-auto ${isMenuOpen ? 'block' : 'ss:hidden'} flex lg:items-center justify-between`}>
                 <div className="text-sm md:flex-grow items-center font-alt text-sm  flex-shrink-0">
-                    <a href="#menu" className="block lg:inline-block lg:mt-0 text-yellow-300 hover:text-yellow-300 mr-4">Home</a>
-                    <a href="#about" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Conteúdo</a>
-                    <a href="#mmr" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">MMR</a>
-                    <a href="#table" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Tabela</a>
-                    <a href="#tournament" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Chaves</a>
-                    <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Bordões</a>
-                    <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Regras</a>
+                    <a href="..#title" className="block lg:inline-block lg:mt-0 text-yellow-300 hover:text-yellow-300 mr-4">Home</a>
+                    <a href="..#about" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Conteúdo</a>
+                    <a href="..#mmr" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">MMR</a>
+                    <a href="..#table" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Tabela</a>
+                    <a href="..#tournament" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Chaves</a>
+                    <a href="..#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Bordões</a>
+                    <Link to="/rules"><a href="#rules" className="block mt-4 lg:inline-block lg:mt-0 hover:text-yellow-300 mr-4 lg:pl-4">Regras</a></Link>
                 </div>
                 <div className='mt-6 lg:mt-0'>
-                    <a href="#" className="text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-300 rounded-full hover:bg-yellow-300 font-bold tracking-widest">Login</a>
+                    <a href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://www.lobbysquad.com.br/api/v1/auth/&openid.realm=https://www.lobbysquad.com.br/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select" className="text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-300 rounded-full hover:bg-yellow-300 font-bold tracking-widest">Login</a>
                 </div>
             </div>
         </nav>

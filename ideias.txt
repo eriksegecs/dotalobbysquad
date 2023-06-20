@@ -1,7 +1,0 @@
-autenticação - 1 mês
-mercado de players
-marcação de jogos
-calendario de jogos
-criação de lobby automatico
-estatisticas dos jogos
-parsing dos jogos
