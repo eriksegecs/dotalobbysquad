@@ -9,6 +9,8 @@ import { Mmr } from '@/components/Mmr'
 import { Table } from '@/components/Table'
 import { Tournament } from '@/components/Tournament'
 import { Rules } from '@/components/Rules'
+import { ScrollToTopButton } from '@/components/ScrollToTopButton'
+
 
 import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom'
 
@@ -35,6 +37,7 @@ export default function Home() {
         
         {/* Copyright */}
         <Copyright />
+        <ScrollToTopButton/>
       </div>
     </BrowserRouter >
   )

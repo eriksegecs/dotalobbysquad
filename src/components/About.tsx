@@ -5,7 +5,8 @@ import checkCircle from '../assets/check-circle.svg'
 
 export function About() {
     return (
-        <section id="about" className="bg-black p-6">
+        <section id="about" className="relative lg:bg-fixed bg-[url(../assets/forest.gif)] p-6">
+            
             <div className="flex flex-wrap m-20 p-6 justify-center items-center">
                 <div className="lg:w-1/2 order-2 lg:order-1">
                     <h3 className="font-alt text-2xl text-white m-4">Transmissão ao vivo dos jogos</h3>
