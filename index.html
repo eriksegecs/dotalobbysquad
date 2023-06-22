@@ -879,6 +879,8 @@
               };
 
               Plotly.newPlot('chart', chartData, layout);
+              submitButton.disabled = false;
+              
 
         // Evento de clique para exibir a lista dos itens selecionados
         document.getElementById('chart').on('plotly_click', function(eventData) {
