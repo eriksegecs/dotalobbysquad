@@ -13,7 +13,7 @@ import { ScrollToTopButton } from '@/components/ScrollToTopButton'
 
 
 import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom'
-import { TwitchClips } from '@/components/TwitchClips'
+import { TwitchEmbed } from '@/components/TwitchEmbed'
 
 export default function Home() {
   return (
@@ -26,7 +26,7 @@ export default function Home() {
           <Route path='/' element={
             <>
               <div className='min-h-screen'>
-              <TwitchClips/>
+              <TwitchEmbed/>
               </div>
               
               <Title/>
