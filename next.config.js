@@ -5,6 +5,7 @@ const nextConfig = {
 
 module.exports = {
     trailingSlash: false,
+    output: 'export',
     
   async headers() {
     return [
