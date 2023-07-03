@@ -1,6 +1,8 @@
 
 import Image from 'next/image'
 import AboutImage from '../assets/twitch.png'
+import { TwitchClips } from '@/components/TwitchClips'
+
 
 export function Title() {
     return (
@@ -17,7 +19,7 @@ export function Title() {
                     </div>
                 </div>
                 <div className="relative lg:w-2/5 p-2 order-2 m-4">
-                    <Image src={AboutImage} className="z-0 lg:pt-[200px] border-none" alt="twitch" />
+                    <TwitchClips />
                     <a href="https://www.twitch.tv/dotalobbysquad" className="absolute right-0 text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-300 rounded-full text-white font-bold hover:bg-yellow-300 mt-4">Próximo Clip</a>
                 </div>
             </div>

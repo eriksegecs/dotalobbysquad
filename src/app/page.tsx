@@ -13,6 +13,7 @@ import { ScrollToTopButton } from '@/components/ScrollToTopButton'
 
 
 import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom'
+import { TwitchClips } from '@/components/TwitchClips'
 
 export default function Home() {
   return (
@@ -24,6 +25,10 @@ export default function Home() {
         <Routes>
           <Route path='/' element={
             <>
+              <div className='min-h-screen'>
+              <TwitchClips/>
+              </div>
+              
               <Title/>
               <About/>
               <Mmr/>

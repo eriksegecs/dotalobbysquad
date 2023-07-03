@@ -27,3 +27,6 @@ npm install aws-sdk passport-steam
 
 // CMD instalação do react-router-dom
 npm i react-router-dom@6
+
+// CMD instalação do Axios para consumo de APIS
+npm i axios
