@@ -768,6 +768,7 @@
   <script src="static/assets/js/main.js"></script>
 
 <script>
+  
   const mmrInput = document.getElementById('mmr-input');
   const submitButton = document.getElementById('mmr-button');
 
@@ -782,19 +783,25 @@
     }
   });
 
-  submitButton.addEventListener('click', function() {
-    const mmr = mmrInput.value;
+// Event Listener para o botão submit
+submitButton.addEventListener('click', function() {
+  const mmr = mmrInput.value;
 
-    // Verifica se o campo está preenchido com um valor numérico
-    if (!isNaN(mmr) && mmr !== '') {
-      // Desabilita o botão para evitar cliques repetidos
-      submitButton.disabled = true;
+  if (!isNaN(mmr) && mmr !== '') {
+    submitButton.disabled = true;
 
-      fetch('https://www.lobbysquad.com.br/api/v1/mmr?mmr_atual=' + mmr)
-        .then(function(response) {
-          return response.json();
-        })
-          .then(function(data) {
+    fetch('https://www.lobbysquad.com.br/api/v1/mmr?mmr_atual=' + mmr)
+      .then(function(response) {
+        // Verifica se o corpo da resposta é vazio (None)
+        if (response.status === 204) {
+          showNotification(); // Mostra a notificação de erro
+          submitButton.disabled = false; // Habilita o botão novamente
+          return null; // Retorna null para sair da cadeia de promessas
+        }
+        return response.json();
+      })
+      .then(function(data) {
+        if (data === null) return; // Se a resposta foi vazia, sai da função
               var dates = [];
               var mmrs = [];
 
@@ -937,7 +944,17 @@
       console.log('Por favor, preencha o campo com um valor numérico antes de enviar.');
     }
   });
+  
+// Função para exibir a notificação
+function showNotification() {
+  const notification = document.getElementById('notification');
+  notification.style.display = 'block';
 
+  // Esconde a notificação após 5 segundos
+  setTimeout(function() {
+    notification.style.display = 'none';
+  }, 5000);
+}
   
 // Função para salvar as informações do jogador no localStorage
 function savePlayerInfo(playerData) {
