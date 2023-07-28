@@ -812,7 +812,7 @@ submitButton.addEventListener('click', function() {
                   var date = new Date(timestamp);
                   dates.push(date.toLocaleDateString());
 
-                  mmrs.push(match.MMR);
+                  mmrs.push(match.mmr);
               });
 
               var smoothedMMR = [];
@@ -828,7 +828,7 @@ submitButton.addEventListener('click', function() {
                       y: mmrs,
                       type: 'scatter',
                       mode: 'lines',
-                      name: 'MMR'
+                      name: 'mmr'
                   },
                   {
                       type: 'line',
