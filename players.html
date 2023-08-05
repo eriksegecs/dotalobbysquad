@@ -30,6 +30,60 @@
   
   <!-- Incluindo a biblioteca DataTables CSS -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
+    <style>
+        /* Definindo o estilo personalizado para a tabela */
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        #userTable {
+            background-color: black; /* Fundo da tabela em preto */
+            color: white;
+        }
+
+        #userTable th,
+        #userTable td {
+            border-color: white; /* Definindo a cor da borda para branco */
+        }
+
+        #userTable img {
+            width: 50px; /* Definindo o tamanho do avatar */
+            height: 50px;
+            object-fit: cover; /* Evitando que a imagem se estique */
+            border-radius: 50%; /* Arredondando a imagem */
+        }
+
+        /* Ajustando a largura da coluna para o avatar */
+        #userTable th:first-child,
+        #userTable td:first-child {
+            width: 60px;
+            max-width: 60px;
+        }
+
+        /* Estilos para corrigir a cor do texto na tabela */
+        #userTable_info,
+        #userTable_paginate,
+        #userTable_filter,
+        #userTable_length {
+            color: white; /* Definindo a cor do texto para branco */
+        }
+
+        #userTable_wrapper .dataTables_empty {
+            color: white; /* Definindo a cor do texto para branco */
+        }
+
+        #userTable_wrapper .dataTables_info,
+        #userTable_wrapper .dataTables_paginate .paginate_button {
+            color: white; /* Definindo a cor do texto para branco */
+        }
+
+        /* Estilo personalizado para as linhas da tabela */
+        #userTable tbody tr {
+            background-color: black;
+        }
+
+    </style>
 </head>
 
 <body>
