@@ -197,11 +197,8 @@
                         }
                     },
                     {
-                        data: 'Attributes',
-                        render: (data) => {
-                            const matchesPlayedAfterAttr = data.find(attr => attr.Name === 'custom:matches_played_after');
-                            return matchesPlayedAfterAttr ? matchesPlayedAfterAttr.Value : '';
-                        }
+                        data: 'matches_played_after',
+                        defaultContent: '' // Define um conteúdo padrão para a coluna realname quando o valor é undefined
                     },
                 ],
                 // Configuração para estilizar a tabela
