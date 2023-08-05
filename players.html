@@ -133,6 +133,7 @@
   </header><!-- End Header -->
 
 
+
   <main id="main">
 
         <!-- ======= Players Section ======= -->
@@ -149,7 +150,7 @@
                 <th>Real Name</th>
                 <th>MMR Atual</th>
                 <th>MMR Médio</th>
-                <th>Match_ID MMR Atual</th>
+                <th>Matches Played After</th>
             </tr>
         </thead>
         <tbody>
@@ -167,7 +168,7 @@
         // Função para preencher os dados da tabela utilizando o DataTables
         function populateDataTable(data) {
             const table = $('#userTable').DataTable({
-                data: data.body,
+                data: data,
                 columns: [
                     {
                         data: 'avatarmedium',
@@ -198,8 +199,8 @@
                     {
                         data: 'Attributes',
                         render: (data) => {
-                            const matchIdAttr = data.find(attr => attr.Name === 'custom:match_id_mmr_atual');
-                            return matchIdAttr ? matchIdAttr.Value : '';
+                            const matchesPlayedAfterAttr = data.find(attr => attr.Name === 'custom:matches_played_after');
+                            return matchesPlayedAfterAttr ? matchesPlayedAfterAttr.Value : '';
                         }
                     },
                 ],
@@ -215,10 +216,10 @@
         fetch(endpointUrl)
             .then(response => response.json())
             .then(data => {
-                if (data.statusCode === 200) {
+                if (data.length > 0) {
                     populateDataTable(data);
                 } else {
-                    console.error('Erro na resposta da API.');
+                    console.error('Nenhum dado encontrado.');
                 }
             })
             .catch(error => console.error('Erro na requisição:', error));
