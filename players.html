@@ -192,7 +192,7 @@
         data: 'Attributes',
         render: (data) => {
           const team = data.find(attr => attr.Name === 'custom:actual_team');
-          if (data.personaname === steamidCookie) {
+          if (data.Username === steamidCookie) {
             return `
               <div class="team-container">
                 <span class="team" data-personaname="${data.personaname}" data-team="${team ? team.Value : ''}">${team ? team.Value : ''}</span>
