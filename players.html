@@ -112,14 +112,14 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
-          <li><a class="nav-link scrollto" href="index.html#about">Conteúdo</a></li>
-          <li><a class="nav-link scrollto" href="index.html#MMR">MMR</a></li>
-          <li><a class="nav-link scrollto" href="index.html#Tabela">Tabela</a></li>
-          <li><a class="nav-link scrollto" href="index.html#Calendario">Calendário</a></li>
-          <li><a class="nav-link scrollto" href="index.html#equipe">Equipe</a></li>
-          <li><a class="nav-link scrollto" href="index.html#testimonials">Bordões</a></li>
+          <li><a class="nav-link scrollto" href="#MMR">MMR</a></li>
+          <li><a class="nav-link scrollto" href="#Tabela">Tabela de Jogos</a></li>
+          <li><a class="nav-link scrollto" href="#Calendario">Calendário</a></li>
+          <li><a class="nav-link scrollto" href="#equipe">Equipe</a></li>
+          <li><a class="nav-link scrollto" href="#testimonials">Bordões</a></li>
           <li><a class="nav-link scrollto" href="regras.html">Regras</a></li>
-          
+          <li><a class="nav-link scrollto" href="players.html">Mercado de Players</a></li>
+
   </ul>
 
       </nav><!-- .navbar -->
@@ -151,7 +151,6 @@
                 <th>Team</th>
                 <th>MMR Atual</th>
                 <th>MMR Médio</th>
-                <th>Matches Played After</th>
             </tr>
         </thead>
         <tbody>
@@ -216,10 +215,6 @@
             const mmrMedioAttr = data.find(attr => attr.Name === 'custom:mmr_medio_120');
             return mmrMedioAttr ? mmrMedioAttr.Value : '';
           }
-        },
-        {
-          data: 'matches_played_after', // Utilizamos diretamente a propriedade matches_played_after
-          defaultContent: ''
         },
         ],
      // Configuração para estilizar a tabela
