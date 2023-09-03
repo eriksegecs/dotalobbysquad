@@ -21,8 +21,5 @@ module.exports = {
       },
     ];
   },
-  async redirects() {
-    return [];
-  },
     output: 'export'
 }
