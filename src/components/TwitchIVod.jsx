@@ -44,7 +44,7 @@ export function TwitchIVod() {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Client-ID': CLIENT_ID,
+        'Client-ID': 'kimne78kx3ncx6brgo4mv6wki5h1ko',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
