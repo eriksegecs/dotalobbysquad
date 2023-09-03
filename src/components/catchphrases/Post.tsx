@@ -42,7 +42,7 @@ export function Post({ author, publishedAt, content } : PostProps) {
     function handleCreateNewComment(event: FormEvent) {
         event.preventDefault()
 
-        setComments([...comments, newCommentText])
+        //setComments([...comments, newCommentText])
         setNewCommentText('')
     }
 
