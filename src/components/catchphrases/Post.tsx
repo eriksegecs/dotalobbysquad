@@ -82,13 +82,6 @@ export function Post({ author, publishedAt, content } : PostProps) {
                 </time>
             </header>
             <div className='leading-6 text-[#c4c4cc] mt-6'>
-               {content.map(line => {
-                if (line.type === 'paragraph') {
-                    return <p key={content} >{line.content}</p>
-                } else if (line.type === 'link') {
-                    return <p key={content} ><a href="#">{line.content}</a></p>
-                }
-               })}
             </div>
 
             <form onSubmit={handleCreateNewComment} className='w-full mt-6 pt-6 border-t border-[#323238]'>
