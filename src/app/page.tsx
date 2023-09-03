@@ -2,7 +2,7 @@
 'use client'
 
 import { Copyright } from '@/components/Copyright'
-import { Header } from '@/components/Header'
+import { NavBar } from '@/components/NavBar'
 import { Title } from '@/components/Title'
 import { About } from '@/components/About'
 import { Mmr } from '@/components/Mmr'
@@ -11,24 +11,20 @@ import { Tournament } from '@/components/Tournament'
 import { Rules } from '@/components/Rules'
 import { ScrollToTopButton } from '@/components/ScrollToTopButton'
 
-
-import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom'
-import { TwitchEmbed } from '@/components/TwitchEmbed'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Catchphrases from '@/components/catchphrases/Catchphrases'
 
 export default function Home() {
+  
   return (
     <BrowserRouter >
       <div>
-        {/* Header */}
-        <Header />
+        {/* NavBar */}
+        <NavBar />
 
         <Routes>
           <Route path='/' element={
-            <>
-              <div className='min-h-screen'>
-              <TwitchEmbed/>
-              </div>
-              
+            <>              
               <Title/>
               <About/>
               <Mmr/>
@@ -37,6 +33,9 @@ export default function Home() {
             </>
           } />
 
+          <Route path="/catchphrases" element={
+            <Catchphrases />
+          } />
           <Route path="/rules" element={<Rules/>} />
         </Routes>
         

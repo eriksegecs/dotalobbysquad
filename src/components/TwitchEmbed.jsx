@@ -1,108 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 
-export function TwitchEmbed() {
-  const [clips, setClips] = useState([]);
-  const [clipIndex, setClipIndex] = useState(0);
-  const [qtdClips, setQtdClips] = useState(100);
-  const [clipsCompleto, setClipsCompleto] = useState([]);
+import React, { useState } from 'react';
+import ReactTwitchEmbedVideo from 'react-twitch-embed-video';
 
-  useEffect(() => {
-    getPopularClipsFromChannel('dotalobbysquad', qtdClips);
-  }, []);
+export function TwitchEmbed({ channelName }) {
+  const [isOnline, setIsOnline] = useState(false);
 
-  useEffect(() => {
-    if (clips.length > 0) {
-      updateIframeSlug();
-    }
-  }, [clipIndex, clips]);
+const CLIENT_ID = process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID;
+const axios = require('axios');
 
-  function updateIframeSlug() {
-    if (clips.length > 0) {
-      const slug = clips[clipIndex]?.node?.slug;
-      const iframe = document.querySelector("#twitch-clips iframe");
-      if (iframe) {
-        iframe.setAttribute('src', `https://clips.twitch.tv/embed?clip=${slug}&parent=http://localhost:3000&autoplay=true&muted=true`);
-      }
-    }
+async function obterToken() {
+  try {
+    const response = await axios.post('https://id.twitch.tv/oauth2/token', null, {
+      params: {
+        client_id: CLIENT_ID,
+        client_secret: process.env.NEXT_PUBLIC_TWITCH_TOKEN,
+        grant_type: 'client_credentials',
+      },
+    });
+    return response.data.access_token;
+  } catch (error) {
+    console.error('Erro ao obter token de acesso:', error);
+    throw error;
   }
+}
 
-  function getRandomClip() {
-    if (clipIndex >= clips.length) {
-      setClipIndex(0);
-      setClips([...clipsCompleto]);
-    }
-
-    const randomIndex = Math.floor(Math.random() * clips.length);
-    const updatedClips = [...clips];
-    updatedClips.splice(randomIndex, 1);
-
-    setClipIndex(clipIndex + 1);
-    setClips(updatedClips);
-
-    return randomIndex;
-  }
-
-  function getPopularClipsFromChannel(channelName, qtdClips) {
-    const url = 'https://gql.twitch.tv/gql';
-    const query = `
-      query {
-        user(login: "${channelName}") {
-          clips(first: ${qtdClips}) {
-            edges {
-              node {
-                id
-                title
-                url
-                viewCount
-                durationSeconds
-                slug
-              }
-            }
-          }
-        }
-      }
-    `;
-
-    const data = {
-      query: query,
-      variables: {}
-    };
-
-    axios.post(url, data, {
+async function verificarOnline() {
+  try {
+    const token = await obterToken();
+    const response = await axios.get(`https://api.twitch.tv/helix/streams?user_login=${channelName}`, {
       headers: {
-        'Client-ID': 'kimne78kx3ncx6brgo4mv6wki5h1ko',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.data)
-      .then(responseData => {
-        if (
-          responseData.data &&
-          responseData.data.user &&
-          responseData.data.user.clips &&
-          responseData.data.user.clips.edges.length > 0
-        ) {
-          const fetchedClips = responseData.data.user.clips.edges;
-          setClips(fetchedClips);
-          setClipsCompleto([...fetchedClips]);
-          setQtdClips(fetchedClips.length);
-          setClipIndex(getRandomClip());
-        } else {
-          console.log('No popular clips found for the channel.');
-        }
-      })
-      .catch(error => {
-        console.error('An error occurred while fetching popular clips:', error);
-      });
+        'Client-ID': CLIENT_ID,
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    const data = response.data;
+    if (data.data.length > 0) {
+      console.log(`O canal ${channelName} está online!`);
+      setIsOnline(true);
+    } else {
+      console.log(`O canal ${channelName} está offline.`);
+      setIsOnline(false);
+    }
+  } catch (error) {
+    console.error('Erro ao verificar status do canal:', error);
   }
+}
+
+verificarOnline();
 
   return (
-    <iframe
-      src={`https://clips.twitch.tv/embed?clip=${clips[clipIndex]?.node?.slug}&parent=http://localhost:3000&autoplay=true&muted=true`}
-      height="<height>"
-      width="<width>"
-      allowFullScreen>
-    </iframe>
+    <div>
+      {isOnline ? (
+        <ReactTwitchEmbedVideo
+          channel={channelName}
+          layout="video"
+          height="480"
+          width="650"
+        />
+      ) : (
+        console.log('O canal esta Offline')
+      )}
+    </div>
   );
 }

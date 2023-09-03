@@ -81,6 +81,9 @@ module.exports = {
       screens: {
         'ss': {'min': '0px', 'max': '1023px'},
       },
+      gridTemplateColumns: {
+        feed: "256px 1fr",
+      },
     },
   },
   plugins: [],

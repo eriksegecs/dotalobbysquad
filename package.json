@@ -4,7 +4,7 @@
   "homepage": "https://eriksegecs.github.io/dotalobbysquad/",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3002",
     "build": "next build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -12,15 +12,18 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node": "20.2.5",
+    "@prisma/client": "^5.2.0",
+    "@types/node": "20.5.1",
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
+    "date-fns": "^2.30.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "gh-pages": "^5.0.0",
     "next": "13.4.4",
+    "phosphor-react": "^1.4.1",
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -31,6 +34,7 @@
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.2.0",
-    "prettier-plugin-tailwindcss": "^0.3.0"
+    "prettier-plugin-tailwindcss": "^0.3.0",
+    "prisma": "^5.2.0"
   }
 }

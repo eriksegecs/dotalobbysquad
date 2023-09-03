@@ -11,7 +11,7 @@ parsing dos jogos
 - ✅20/06/2023 : Componente das Regras
 - ✅20/06/2023 : Estilização de botões da Navbar (os componentes selecionados devem ficar com a cor selecionada aplicada)
 - ✅20/06/2023 : Estilização da imagem de background (deve conter um efeito escurecendo a imagem)
-- Tela com os clips da Twitch
+- ✅03/09/2023 : Tela com os clips da Twitch
 - Login completo : 
     botão de Logout;
     Cookies para armazenamento de Token e Reautenticação de Usuário;
@@ -30,3 +30,9 @@ npm i react-router-dom@6
 
 // CMD instalação do Axios para consumo de APIS
 npm i axios
+
+// CMD instalação do Prisma para gerenciamento de Banco de Dados
+npm i prisma -D
+npm i @prisma/client
+npx prisma init --datasource-provider SQLite
+npx prisma migrate dev
