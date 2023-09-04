@@ -1,6 +1,6 @@
 
-import { Sidebar } from '@/components/catchphrases/Sidebar'
-import { Post } from '@/components/catchphrases/Post'
+import { Sidebar } from '@/components/Sidebar'
+import { Post } from '@/components/Post'
 
 const posts = [
     {

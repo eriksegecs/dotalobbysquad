@@ -2,7 +2,7 @@
 'use client'
 import logo from '../../assets/ignite-logo.svg'
 import { ThumbsUp, Trash } from "phosphor-react"
-import { Avatar } from '@/components/catchphrases/Avatar'
+import { Avatar } from '@/components/Avatar'
 import { useState } from 'react'
 
 interface CommentProps {

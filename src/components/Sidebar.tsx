@@ -1,8 +1,8 @@
 
 import Image from 'next/image'
-import logo from '../../assets/ignite-logo.svg'
+import logo from '../assets/ignite-logo.svg'
 import { PencilLine } from 'phosphor-react'
-import { Avatar } from '@/components/catchphrases/Avatar'
+import { Avatar } from '@/components/Avatar'
 
 export function Sidebar() {
 
