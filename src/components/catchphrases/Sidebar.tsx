@@ -10,7 +10,7 @@ export function Sidebar() {
         <aside className='bg-[#202024] overflow-hidden'>
             <Image src={logo} alt='image background' className='h-16 w-full object-cover'></Image>
             <div className='flex flex-col items-center justify-center -mt-8'>
-                <Avatar />
+                <Avatar src={logo}/>
                 <strong className='mt-4 text-[#e1e1e6] leading-6'>Christyan Segecs</strong>
                 <span className='text-sm text-[#8d8d99]'>Web Developer</span>
             </div>

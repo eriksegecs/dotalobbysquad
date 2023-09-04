@@ -1,21 +1,10 @@
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export function TwitchIVod() {
   const [clips, setClips] = useState([]);
   const [currentClipIndex, setCurrentClipIndex] = useState(0);
 
-  useEffect(() => {
-    getPopularClipsFromChannel('dotalobbysquad', 10);
-  }, []);
-
-  useEffect(() => {
-    if (clips.length > 0) {
-      setCurrentClipIndex(0);
-    }
-  }, [clips]);
-
-  async function getPopularClipsFromChannel(channelName, qtdClips) {
+  const getPopularClipsFromChannel = useCallback(async (channelName, qtdClips) => {
     const url = 'https://gql.twitch.tv/gql';
     const query = `
       query {
@@ -41,23 +30,34 @@ export function TwitchIVod() {
       variables: {},
     };
 
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Client-ID': 'kimne78kx3ncx6brgo4mv6wki5h1ko',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((responseData) => {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Client-ID': 'kimne78kx3ncx6brgo4mv6wki5h1ko',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
         const clipData = responseData.data.user.clips.edges.map(
           (edge) => edge.node
         );
         const shuffledClipData = shuffleArray(clipData);
         setClips(shuffledClipData);
-      });
-  }
+      } else {
+        console.error('Failed to fetch data from Twitch API');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    getPopularClipsFromChannel('dotalobbysquad', 10);
+  }, [getPopularClipsFromChannel]);
 
   function handleNextClip() {
     if (clips.length > 0) {

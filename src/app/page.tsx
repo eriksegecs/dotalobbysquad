@@ -1,16 +1,21 @@
 
 'use client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { Copyright } from '@/components/Copyright'
 import { NavBar } from '@/components/NavBar'
+import { Title } from '@/components/Title'
+import { About } from '@/components/About'
+import { Mmr } from '@/components/Mmr'
+import { Table } from '@/components/Table'
+import { Tournament } from '@/components/Tournament'
 import { Rules } from '@/components/Rules'
 import { ScrollToTopButton } from '@/components/ScrollToTopButton'
 
-import { CatchphrasesHome } from '@/app/catchphrases/page'
-import { HomePage } from '@/app/home/page'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Catchphrases } from '@/components/Catchphrases'
+import { HomePage } from '@/components/HomePage'
 
-export function Home() {
+export default function Home() {
   
   return (
     <BrowserRouter >
@@ -19,9 +24,9 @@ export function Home() {
         <NavBar />
 
         <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path="/catchphrases" element={<CatchphrasesHome />} />
-          <Route path="/rules" element={<Rules/>} />
+          <Route path='/' Component={HomePage} />
+          <Route path="/catchphrases" Component={Catchphrases} />
+          <Route path="/rules" Component={Rules} />
         </Routes>
         
         {/* Copyright */}
