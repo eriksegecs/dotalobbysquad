@@ -13,7 +13,7 @@ export function NavBar() {
         setMenuOpen(!isMenuOpen);
     };
 
-    const [activeSection, setActiveSection] = useState('');
+    const [activeSection, setActiveSection] = useState('title');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -59,8 +59,8 @@ export function NavBar() {
                     <a href="..#mmr" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'mmr' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>MMR</a>
                     <a href="..#table" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'table' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Tabela</a>
                     <a href="..#tournament" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'tournament' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Chaves</a>
-                    <Link to="/catchphrases"><a href="#catchphrases" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'catchphrases' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Bordões</a></Link>
-                    <Link to="/rules"><a href="#rules" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'rules' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Regras</a></Link>
+                    <Link to="/catchphrases" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'catchphrases' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Bordões</Link>
+                    <Link to="/rules" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'rules' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Regras</Link>
                 </div>
                 <div className='mt-6 lg:mt-0'>
                     <a href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://www.lobbysquad.com.br/api/v1/auth/&openid.realm=https://www.lobbysquad.com.br/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select" className="text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-500 rounded-full hover:bg-yellow-400 font-bold tracking-widest">Login</a>

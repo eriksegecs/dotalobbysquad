@@ -6,18 +6,14 @@ const posts = [
     {
       id: 1,
       author: {
-        avatarUrl: '',
         name: 'Sorieh',
         role: 'Omi do urso'
       },
-      content: [
-        { type: 'paragraph', content: 'Fi, a regra é clara: passou de 34 minutos PL não perde jogo' },
-      ],
       publishedAt: new Date('2022-05-03 20:00:00')
     }
 ]
 
-export default function Catchphrases() {
+export function Catchphrases() {
 
     return (
         <div className='bg-[#121214] text-[#c4c4cc] border border-transparent'>
@@ -29,7 +25,6 @@ export default function Catchphrases() {
                     <Post
                       key={post.id}
                       author={post.author}
-                      content={post.content}
                       publishedAt={post.publishedAt} />
                   ) 
                 })}

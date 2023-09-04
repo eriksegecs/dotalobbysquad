@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+
+import { useState, useEffect } from 'react';
 
 export function TwitchIVod() {
   const [clips, setClips] = useState([]);
   const [currentClipIndex, setCurrentClipIndex] = useState(0);
-  const CLIENT_ID = process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID;
 
   useEffect(() => {
     getPopularClipsFromChannel('dotalobbysquad', 10);

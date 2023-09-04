@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ReactTwitchEmbedVideo from 'react-twitch-embed-video';
 
 export function TwitchEmbed({ channelName }) {
