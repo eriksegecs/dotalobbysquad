@@ -1,5 +1,6 @@
 
 export function Mmr() {
+    
     return (
         <section id="mmr" className="mx-auto bg-[#1a1814]">
             <div className="container mx-auto sm:px-4">

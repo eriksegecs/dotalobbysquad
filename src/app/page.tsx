@@ -11,6 +11,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 export default function Home() {
   
   return (
+    <>
     <BrowserRouter >
       <div>
         {/* NavBar */}
@@ -27,5 +28,6 @@ export default function Home() {
         <ScrollToTopButton/>
       </div>
     </BrowserRouter >
+    </>
   )
 }
