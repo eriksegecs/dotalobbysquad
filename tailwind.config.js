@@ -77,7 +77,6 @@ module.exports = {
           800: '#027435',
           900: '#025929',
         }
-
       },
       screens: {
         'ss': {'min': '0px', 'max': '1023px'},
