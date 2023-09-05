@@ -1,14 +1,14 @@
 
 'use client'
 import { Copyright } from "@/components/Copyright";
-import { NavBarRules } from "@/components/NavBarRules";
+import { NavBar } from "@/components/NavBar";
 import { Rules } from "@/components/Rules";
 
 export default function RulesPage() {
 
     return (
         <>
-            <NavBarRules />
+            <NavBar />
             <Rules />
             <Copyright />
         </>

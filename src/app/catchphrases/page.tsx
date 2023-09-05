@@ -1,14 +1,14 @@
 
 'use client'
 import { Copyright } from '@/components/Copyright'
-import { NavBarCatchphrases } from '@/components/NavBarCatchphrases'
+import { NavBar } from '@/components/NavBar'
 import { Catchphrases } from '@/components/Catchphrases'
 
 export default function CatchphrasesHome() {
 
     return (
       <>
-        <NavBarCatchphrases />
+        <NavBar />
         <Catchphrases />
         <Copyright />
       </>
