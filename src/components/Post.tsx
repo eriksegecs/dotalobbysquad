@@ -4,7 +4,6 @@ import { Avatar } from '@/components/Avatar'
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import logo from '../assets/ignite-logo.svg'
-import { Comment } from '@/components/Comment'
 import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
 
 interface Author {

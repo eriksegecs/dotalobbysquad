@@ -1,10 +1,8 @@
 
 'use client'
-
 import Image from 'next/image'
 import menu from '../assets/menu.svg'
 import { useState } from 'react';
-
 
 export function NavBarCatchphrases() {
     const [isMenuOpen, setMenuOpen] = useState(false);
@@ -12,7 +10,6 @@ export function NavBarCatchphrases() {
     const toggleMenu = () => {
         setMenuOpen(!isMenuOpen);
     };
-
     
     return (
         <nav id="menu" className="z-50 sticky lg:top-0 w-full flex ss:flex-wrap justify-center p-4 bg-black border border-b-yellow-200 border-x-transparent text-white">

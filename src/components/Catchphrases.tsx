@@ -1,4 +1,5 @@
 
+'use client'
 import { Sidebar } from '@/components/Sidebar'
 import { Post } from '@/components/Post'
 

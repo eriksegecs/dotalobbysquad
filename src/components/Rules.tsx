@@ -1,5 +1,6 @@
 
 export function Rules() {
+    
     return (
         <section id="rules" className="flex items-center justify-center bg-[#1a1814]">
                 <div className="relative w-full pt-[200%] overflow-hidden rounded-lg will-change-transform">

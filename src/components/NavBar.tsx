@@ -1,12 +1,12 @@
 
 'use client'
-
 import Image from 'next/image'
 import menu from '../assets/menu.svg'
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 
 export function NavBar() {
+    
     const [isMenuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {

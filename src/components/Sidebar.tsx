@@ -1,4 +1,5 @@
 
+'use client'
 import Image from 'next/image'
 import logo from '../assets/ignite-logo.svg'
 import { PencilLine } from 'phosphor-react'

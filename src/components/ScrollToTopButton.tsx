@@ -1,6 +1,5 @@
 
 'use client'
-
 import { useState } from 'react';
 import Image from 'next/image'
 import Up from '../assets/arrow-up.svg'
@@ -26,7 +25,6 @@ const [showButton, setShowButton] = useState(false);
 
     window.addEventListener('scroll', handleScroll);
 
-    
         return (
             <>
                 {showButton && (
