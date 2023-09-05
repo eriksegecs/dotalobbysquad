@@ -1,6 +1,6 @@
 
-import { TwitchEmbed } from '@/components/TwitchEmbed'
-import { TwitchIVod } from '@/components/TwitchIVod'
+'use client'
+import { TwitchPlayer } from '@/components/TwitchPlayer'
 
 export function Title() {
 
@@ -18,8 +18,7 @@ export function Title() {
                     </div>
                 </div>
                 <div className="relative lg:w-2/5 p-2 order-2 md:ml-20">
-                    <TwitchEmbed channelName="dotalobbysquad"/>
-                    <TwitchIVod />
+                    <TwitchPlayer />
                 </div>
             </div>
         </section>
