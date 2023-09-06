@@ -90,7 +90,7 @@ export function TwitchIVod() {
       {clips.length > 0 ? (
         <>
           <iframe
-            src={`https://clips.twitch.tv/embed?clip=${clips[currentClipIndex].slug}&parent=https://eriksegecs.github.io&autoplay=true`}
+            src={`https://clips.twitch.tv/embed?clip=${clips[currentClipIndex].slug}&parent=eriksegecs.github.io&autoplay=true`}
             width="640"
             height="360"
             allowFullScreen
