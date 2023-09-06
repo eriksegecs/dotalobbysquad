@@ -54,10 +54,10 @@ export function NavBar() {
             </div>
             <div className={`ss:w-full w-auto ${isMenuOpen ? 'block' : 'ss:hidden'} flex lg:items-center justify-between`}>
                 <div className="text-sm md:flex-grow items-center font-alt flex-shrink-0">
-                    <Link href="/#title" className={`block lg:inline-block lg:mt-0 ${activeSection === 'title' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4`}>Home</Link>
-                    <Link href="/#about" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'about' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Conteúdo</Link>
-                    <Link href="/#mmr" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'mmr' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>MMR</Link>
-                    <Link href="/#table" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'table' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Tabela</Link>
+                    <Link href="#title" className={`block lg:inline-block lg:mt-0 ${activeSection === 'title' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4`}>Home</Link>
+                    <Link href="#about" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'about' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Conteúdo</Link>
+                    <Link href="#mmr" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'mmr' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>MMR</Link>
+                    <Link href="#table" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'table' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Tabela</Link>
                     <Link href="#tournament" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'tournament' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Chaves</Link>
                     <Link href="/catchphrases" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'catchphrases' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Bordões</Link>
                     <Link href="/rules" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'rules' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Regras</Link>
