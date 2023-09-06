@@ -1,12 +1,10 @@
 
-const isProd = process.env.NODE_ENV === "production";
-const prefix = isProd ? "/dotalobbysquad" : "";
+const repo = 'dotalobbysquad'
+const assetPrefix = `/${repo}/`
+const basePath = `/${repo}`
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   output: 'export',
-  basePath: prefix,
-  assetPrefix: prefix,
+  assetPrefix: assetPrefix,
+  basePath: basePath,
 }
-
-module.exports = nextConfig

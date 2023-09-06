@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 export function NavBar() {
-    const isProd = process.env.NODE_ENV === "production";
-    console.log(isProd)
     
     const [isMenuOpen, setMenuOpen] = useState(false);
 
