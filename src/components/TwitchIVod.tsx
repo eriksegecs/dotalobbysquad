@@ -91,8 +91,8 @@ export function TwitchIVod() {
         <>
           <iframe
             src={`https://clips.twitch.tv/embed?clip=${clips[currentClipIndex].slug}&parent=eriksegecs.github.io&autoplay=true`}
-            width="640"
-            height="360"
+            width="1024"
+            height="576"
             allowFullScreen
           ></iframe>
           <button onClick={handleNextClip} className="lg:absolute lg:right-0 text-xs font-alt uppercase px-4 py-2 border-2 border-yellow-500 rounded-full text-white font-bold hover:bg-yellow-400 mt-4">Próximo Clip</button>
