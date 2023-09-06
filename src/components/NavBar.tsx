@@ -44,7 +44,7 @@ export function NavBar() {
         <nav id="menu" className="z-50 sticky lg:top-0 w-full flex ss:flex-wrap justify-center p-4 bg-black border border-b-yellow-200 border-x-transparent text-white">
             <div className='mr-6 flex ss:w-full w-auto ss:justify-between'>
                 <div className='flex flex-wrap'>
-                    <a href='/' className="font-alt uppercase text-3xl tracking-tight">DotaLobbySquad</a>
+                    <a href='https://eriksegecs.github.io/dotalobbysquad/' className="font-alt uppercase text-3xl tracking-tight">DotaLobbySquad</a>
                 </div>
                 <div className="lg:hidden">
                     <button className="px-3 py-2 border rounded border-teal-400 hover:border-white" onClick={toggleMenu}>
