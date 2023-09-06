@@ -1,5 +1,4 @@
 
-'use client'
 import dynamic from 'next/dynamic'
 
 const DynamicTwitchVideo = dynamic(() => import('react-twitch-embed-video'), {
