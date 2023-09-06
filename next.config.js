@@ -4,6 +4,7 @@ const prefix = isProd ? "/dotalobbysquad" : "";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   basePath: prefix,
   assetPrefix: prefix,
 }
