@@ -4,7 +4,6 @@
 const basePath = '/dotalobbysquad'
 
 const nextConfig = {
-  output: 'export',
   basePath: basePath,
 }
 
