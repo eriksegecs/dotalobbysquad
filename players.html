@@ -174,7 +174,7 @@
     const steamidCookie = getCookie("steamid"); // Substitua "steamid" pelo nome correto do cookie
     const table = $('#userTable').DataTable({
       "search": {
-            "smart": false
+            "smart": true
       },
       data: data,
       columns: [
@@ -225,6 +225,19 @@
       const tableWrapper = this.api().table().container();
       tableWrapper.style.background = 'black';
 
+       $('#search-input').on('keyup', function() {
+        var keywords = this.value.toLowerCase().split(" ");
+        tabela
+            .search(function (value, index, row) {
+                for (var i = 0; i < keywords.length; i++) {
+                    if (value.toLowerCase().includes(keywords[i])) {
+                        return true;
+                    }
+                }
+                return false;
+            })
+            .draw();
+    });
       // Adicione um evento de clique no ícone de edição da equipe
       $('#userTable').on('click', '.edit-icon', function (event) {
         event.stopPropagation(); // Impede a propagação do evento para o elemento pai (a célula da tabela)
