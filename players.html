@@ -173,6 +173,9 @@
   function populateDataTable(data) {
     const steamidCookie = getCookie("steamid"); // Substitua "steamid" pelo nome correto do cookie
     const table = $('#userTable').DataTable({
+      "search": {
+            "smart": false
+      },
       data: data,
       columns: [
         {
