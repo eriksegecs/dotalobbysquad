@@ -9,6 +9,7 @@ O DotaLobbySquad é uma comunidade de dota, esse projeto tem como propósito pro
 Para acessa-lo basta acessar o link https://www.lobbysquad.com.br
 
 
+
 Atenciosamente DLS.
 
 Discord: https://discord.gg/xqGFZhMahm
