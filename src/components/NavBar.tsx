@@ -1,72 +1,77 @@
 
-'use client'
-import Image from 'next/image'
-import menu from '../assets/menu.svg'
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import Link from 'next/link'
+import { UserAccountNav } from './UserAccountNav'
+import { NextApiRequest, NextApiResponse } from 'next/types'
+import { getAuthOptions } from '@/lib/auth'
+import { getServerSession } from 'next-auth'
 
-export function NavBar() {
-    
-    const [isMenuOpen, setMenuOpen] = useState(false);
+interface NavBarProps {
+    session: Session | null
+}
 
-    const toggleMenu = () => {
-        setMenuOpen(!isMenuOpen);
-    };
+interface User {
+    name: string
+    email: string
+    image: string
+    id: string
+    username: string
+}
 
-    const [activeSection, setActiveSection] = useState('title');
+interface Session {
+    user: User
+    expires: string
+}
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const sections = document.querySelectorAll('section');
-            let active = '';
+export async function NavBar(req: Request) {
 
-            sections.forEach((section) => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                const scrollPosition = window.pageYOffset;
+    const authOptions = getAuthOptions(req)
 
-                if (scrollPosition >= sectionTop - 50 && scrollPosition < sectionTop + sectionHeight - 50) {
-                    active = section.id;
-                }
-            });
+    const session = await getServerSession(authOptions)
 
-            setActiveSection(active);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-    
     return (
-        <nav id="menu" className="z-50 sticky lg:top-0 w-full flex ss:flex-wrap justify-center p-4 bg-black border border-b-yellow-200 border-x-transparent text-white">
+        <nav id='menu' className='z-50 sticky lg:top-0 w-full flex ss:flex-wrap justify-center p-4 bg-black border border-b-yellow-200 border-x-transparent text-white'>
             <div className='mr-6 flex ss:w-full w-auto ss:justify-between'>
                 <div className='flex flex-wrap'>
-                    <a href='https://eriksegecs.github.io/dotalobbysquad/' className="font-alt uppercase text-3xl tracking-tight">DotaLobbySquad</a>
+                    <a href='https://eriksegecs.github.io/dotalobbysquad/' className='font-alt uppercase text-3xl tracking-tight'>DotaLobbySquad</a>
                 </div>
-                <div className="lg:hidden">
-                    <button className="px-3 py-2 border rounded border-teal-400 hover:border-white" onClick={toggleMenu}>
-                        <Image className="" src={menu} alt="menu"/>
-                    </button>
-                </div>
+
             </div>
-            <div className={`ss:w-full w-auto ${isMenuOpen ? 'block' : 'ss:hidden'} flex lg:items-center justify-between`}>
-                <div className="text-sm md:flex-grow items-center font-alt flex-shrink-0">
-                    <Link href="#title" className={`block lg:inline-block lg:mt-0 ${activeSection === 'title' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4`}>Home</Link>
-                    <Link href="#about" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'about' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Conteúdo</Link>
-                    <Link href="#mmr" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'mmr' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>MMR</Link>
-                    <Link href="#table" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'table' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Tabela</Link>
-                    <Link href="#tournament" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'tournament' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Chaves</Link>
-                    <Link href="/catchphrases" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'catchphrases' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Bordões</Link>
-                    <Link href="/rules" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'rules' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Regras</Link>
-                    <Link href="/playerstable" className={`block mt-4 lg:inline-block lg:mt-0 ${activeSection === 'rules' ? 'text-yellow-300' : 'text-white'} hover:text-yellow-300 mr-4 lg:pl-4`}>Mercado de Players</Link>
+            <div className={`ss:w-full w-auto   flex lg:items-center justify-between`}>
+                <div className='text-sm md:flex-grow items-center font-alt flex-shrink-0'>
+                    <Link href='/#title' className={`block lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-4`}>Home</Link>
+                    <Link href='/#about' className={`block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-4 lg:pl-4`}>Conteúdo</Link>
+                    <Link href='/#mmr' className={`block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-4 lg:pl-4`}>MMR</Link>
+                    <Link href='/#table' className={`block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-4 lg:pl-4`}>Tabela</Link>
+                    <Link href='/#tournament' className={`block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-4 lg:pl-4`}>Chaves</Link>
+                    <Link href='/catchphrases' className={`block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-4 lg:pl-4`}>Bordões</Link>
+                    <Link href='/rules' className={`block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-4 lg:pl-4`}>Regras</Link>
+                    <Link href='/playerstable' className={`block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-4 lg:pl-4`}>Mercado de Players</Link>
                 </div>
                 <div className='mt-6 lg:mt-0'>
-                    <a href="https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=https://www.lobbysquad.com.br/api/v1/auth/&openid.realm=https://www.lobbysquad.com.br/&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select" className="text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-500 rounded-full hover:bg-yellow-400 font-bold tracking-widest">Login</a>
+                {session?.user ? (
+                    <UserAccountNav user={session.user}/>
+                ) : (
+                    <Link href='/sign-in' className='text-sm font-alt uppercase px-4 py-2 border-2 border-yellow-500 rounded-full hover:bg-yellow-400 font-bold tracking-widest'>Login</Link>
+                )}
                 </div>
             </div>
         </nav>
     )   
+}
+
+// Server-side rendering to fetch the session
+interface CustomRequest extends NextApiRequest {
+    cookies: Partial<{ [key: string]: string; }>;
+  }
+export async function getServerSideProps(context:{ req: CustomRequest, res: NextApiResponse }) {
+    const authOptions = getAuthOptions(context.req)
+    const session = await getServerSession(context.req, context.res, authOptions)
+  
+    return {
+      props: { session } // pass session to the page component as a prop
+    }
+  }
+
+function getAuthSession(authOptions: any) {
+    throw new Error('Function not implemented.')
 }

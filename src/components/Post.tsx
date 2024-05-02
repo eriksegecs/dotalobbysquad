@@ -1,95 +1,73 @@
 
 'use client'
-import { Avatar } from '@/components/Avatar'
-import { format, formatDistanceToNow } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR'
-import logo from '../assets/ignite-logo.svg'
-import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
+import { Post, User, Vote } from '@prisma/client'
+import { formatTimeToNow } from '@/lib/utils'
+import { useRef } from 'react'
+import { MessageSquare } from 'lucide-react'
+import { EditorOutput } from './EditorOutput'
+import { PostVoteClient } from './post-vote/PostVoteClient'
 
-interface Author {
-    name: String;
-    role: String;
-    avatarUrl: string
-}
+type PartialVote = Pick<Vote, 'type'>
 
 interface PostProps {
-    author: Author;
-    publishedAt: Date;
-    content: string
+    subredditName: string
+    post: Post & {
+        author: User
+        votes: Vote[]
+    }
+    commentAmt: number
+    votesAmt: number
+    currentVote?: PartialVote
 }
 
-export function Post({ author, publishedAt, content } : PostProps) {
+export function Post({ subredditName, post, commentAmt, votesAmt, currentVote }: PostProps) {
 
-    const [comments, setComments] = useState('')
+    const pRef = useRef<HTMLDivElement>(null)
 
-    const [newCommentText, setNewCommentText] = useState('')
+    return(
+        <div className='rounded-md bg-white shadow'>
+            <div className='px-6 py-4 flex justify-between'>
+                <PostVoteClient initialVotesAmt={votesAmt} initialVote={currentVote?.type} postId={post.id}/>
 
-    const publishedDateFormatted = format(publishedAt, "d' de 'LLLL' às 'HH:mm'h'", {
-        locale: ptBR
-    })
+                <div className='w-0 flex-1'>
+                    <div className='max-h-40 mt-1 text-xs text-gray-500'>
+                        {subredditName ? (
+                            <>
+                                <a href={`/r/${subredditName}`} className='underline text-zinc-900 text-sm underline-offset-2'>
+                                    r/{subredditName}
+                                </a>
+                                <span className='px-1'>•</span>
+                            </>
+                        ) : null}
+                        <span>Posted by u/{post.author.name}</span>{' '}
+                        {/* <span>Posted by u/{post.author.username}</span>{' '} */}
+                        {formatTimeToNow(new Date(post.createdAt))}
+                    </div>
 
-    const publishedDateRelativeNow = formatDistanceToNow(publishedAt, {
-        locale: ptBR,
-        addSuffix: true
-    })
+                    <a href={`/r/${subredditName}/post/${post.id}`}>
+                        <h1 className='text-lg font-semibold py-2 leading-6 text-gray-900'>
+                            {post.title}
+                        </h1>
+                    </a>
 
-    function handleCreateNewComment(event: FormEvent) {
+                    <div className='relative text-sm max-h-40 w-full overflow-clip' ref={pRef}>
 
-    }
+                        <EditorOutput content={post.content} />
 
-    function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
-        event.target.setCustomValidity('')
-        setNewCommentText(event.target.value)
-    }
-
-    function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
-        event.target.setCustomValidity('Esse campo é obrigatório!')
-    }
-
-    function deleteComment(commentToDelete: string) {
-       
-    }
-
-    const isNewCommentEmpty = newCommentText.length === 0
-
-    return (
-        <article className='bg-[#202024] rounded-md p-10 mt-8 first:mt-0'>
-            <header className='flex items-center justify-between'>
-                <div className='flex items-center gap-4'>
-                    <Avatar src={logo} />
-                    {/* <Avatar src={author.avatarUrl}  */} 
-                    <div className='flex flex-col'>
-                        <strong className='text-[#e1e1e6] leading-6'>{author.name}</strong>
-                        <span className='text-sm text-[#8d8d99] leading-6'>{author.role}</span>
+                        {pRef.current?.clientHeight === 160 ? (
+                            <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent' />
+                        ) : null}
                     </div>
                 </div>
-
-                <time title={publishedDateFormatted}
-                    dateTime={publishedAt.toISOString()}>
-                    {publishedDateRelativeNow}
-                </time>
-            </header>
-            <div className='leading-6 text-[#c4c4cc] mt-6'>
-               {<p key={content} >{content}</p>}
             </div>
 
-            <form onSubmit={handleCreateNewComment} className='w-full mt-6 pt-6 border-t border-[#323238]'>
-                <strong className='leading-6 text-[#e1e1e6]'>Deixe seu feedback</strong>
-
-                <textarea className='w-full bg-[#121214] border-2 border-[#202024] ring-1 ring-yellow-400 resize-none h-24 p-4 rounded-md text-[#e1e1e6] leading-5 mt-4 peer'
-                    placeholder='Deixe um comentário'
-                    value={newCommentText}
-                    onChange={handleNewCommentChange}
-                    onInvalid={handleNewCommentInvalid}
-                    required>
-                </textarea>
-                <footer className={`${isNewCommentEmpty ? "invisible max-h-0" : "max-h-full"}`}>
-                    <button type='submit' disabled={isNewCommentEmpty} className='bg-[#00875f] text-white font-bold py-4 px-6 mt-4 rounded-md border-0 hover:bg-[#00b37e] transition-colors duration-200 ease-in-out'>Publicar</button>
-                </footer>
-            </form>
-            <div className='mt-8'>
-                
+            <div className='bg-gray-50 z-20 text-sm p-4 sm:px-6'>
+                <a className='w-fit flex items-center gap-2' href={`/r/${subredditName}/post/${post.id}`}>
+                    <MessageSquare className='h-4 w-4' />
+                    {commentAmt}
+                    comments
+                </a>
             </div>
-        </article>
+        </div>
     )
 }

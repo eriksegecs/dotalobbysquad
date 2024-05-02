@@ -95,7 +95,7 @@ export function TwitchIVod() {
             height="576"
             allowFullScreen
           ></iframe>
-          <button onClick={handleNextClip} className="lg:absolute lg:right-0 text-xs font-alt uppercase px-4 py-2 border-2 border-yellow-500 rounded-full text-white font-bold hover:bg-yellow-400 mt-4">Próximo Clip</button>
+          <button onClick={handleNextClip} className='lg:absolute lg:right-0 text-xs font-alt uppercase px-4 py-2 border-2 border-yellow-500 rounded-full text-white font-bold hover:bg-yellow-400 mt-4'>Próximo Clip</button>
         </>
       ) : (
         <p>Loading clips...</p>

@@ -2,7 +2,7 @@
 'use client'
 import { TwitchEmbed } from '@/components/TwitchEmbed'
 import { TwitchIVod } from '@/components/TwitchIVod'
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export function TwitchPlayer() {

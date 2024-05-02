@@ -1,0 +1,38 @@
+
+// CMD instalação do react-router-dom
+npm i react-router-dom@6
+
+// CMD instalação do Axios para consumo de APIS
+npm i axios
+
+// CMD instalação do Prisma para gerenciamento de Banco de Dados
+npm i prisma -D
+npm i @prisma/client
+npx prisma init --datasource-provider SQLite
+npx prisma migrate dev
+
+npm install next-auth
+npm i nanoid
+npm install next-auth-provider-steam
+npm install openid-client
+ npx prisma db pull   
+ npx prisma generate 
+
+ @tanstack/react-query
+ next-auth-steam
+ npx shadcn-ui@latest init
+ npx shadcn-ui@latest add button
+npm i date-fns
+npm i uploadthing
+npm i @mantine/hooks
+npx shadcn-ui@latest add textarea
+npx shadcn-ui@latest add label
+npm i editorjs-react-renderer
+npm i @uploadthing/react
+npm i @upstash/redis
+npx shadcn-ui@latest add input
+npm i react-textarea-autosize
+npm i -save-dev @hookform/resolvers
+npm install react-hook-form
+npm i @editorjs/editorjs
+npx shadcn-ui@latest add card
