@@ -36,7 +36,6 @@
           <li><a class="nav-link scrollto" href="#Tabela">Tabela de Jogos</a></li>
           <li><a class="nav-link scrollto" href="#testimonials">Bordões</a></li>
           <li><a class="nav-link scrollto" href="regras.html">Regras</a></li>
-          <li><a class="nav-link scrollto" href="players.html">Mercado de Players</a></li>
         </ul>
       </nav>
     </div>
@@ -44,7 +43,16 @@
 
   <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
-      <!-- Hero content remains untouched -->
+      <div id="twitch-live" class="hide"></div>
+      <div id="twitch-clips" class="hide">
+        <iframe
+          src="static/assets/img/transmissao.png"
+          height="480"
+          width="854"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <script src="https://embed.twitch.tv/embed/v1.js"></script>
     </div>
   </section>
 
@@ -66,7 +74,26 @@
           <h2>Palavras dos fãs</h2>
           <p>Bordões da comunidade</p>
         </div>
-        <!-- Testimonials slider and content remains untouched -->
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+            <!-- Exemplos de bordões -->
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <p><i class="bx bxs-quote-alt-left quote-icon-left"></i> Samuel Golveia 😎 <i class="bx bxs-quote-alt-right quote-icon-right"></i></p>
+                <h3>Samuel Golveia 😎</h3>
+                <h4>Fala bosta profissional</h4>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <p><i class="bx bxs-quote-alt-left quote-icon-left"></i> Buyback I-R-R-E-L-E-V-A-N-T-E <i class="bx bxs-quote-alt-right quote-icon-right"></i></p>
+                <h3>Fearless</h3>
+                <h4>Vergonha da Pango major</h4>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
       </div>
     </section>
 
